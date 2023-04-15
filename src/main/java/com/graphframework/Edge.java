@@ -1,17 +1,27 @@
 package com.graphframework;
 
 public class Edge {
-    private String label;
-    private boolean isVisited;
+    private int weight;
 
-    // main Constructor
-    public Edge(String label, boolean isVisited) {
-        this.label = label;
-        this.isVisited = isVisited;
+
+    //main Constructor
+    public Edge(int weight) {
+        this.weight = weight;
     }
 
+
     public static void displayInfo() {
-        
+        //TODO: implmenet function
+    }
+
+
+    public int getWeight() {
+        return weight;
+    }
+
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
     
 }

@@ -31,6 +31,30 @@ public class Graph {
     public static void makeEdge(Vertex target, Vertex source, int weight) {
         //TODO: implement function and make return type Edge
     }
+
+    public int getVerticesNo() {
+        return verticesNo;
+    }
+
+    public void setVerticesNo(int verticesNo) {
+        this.verticesNo = verticesNo;
+    }
+
+    public int getEdgeNo() {
+        return edgeNo;
+    }
+
+    public void setEdgeNo(int edgeNo) {
+        this.edgeNo = edgeNo;
+    }
+
+    public boolean isDigraph() {
+        return isDigraph;
+    }
+
+    public void setDigraph(boolean isDigraph) {
+        this.isDigraph = isDigraph;
+    }
     
 
 

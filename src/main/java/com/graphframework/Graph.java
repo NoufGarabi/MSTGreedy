@@ -15,21 +15,21 @@ public class Graph {
 
     /*Function that takes verticesNo and edgeNo and make a random graph
      that is connected and have random weights */
-    private static Graph makeGraph(int verticesNo, int edgeNo) {
-        //TODO: implement function
+     public static void makeGraph(int verticesNo, int edgeNo) {
+        //TODO: implement function and make return type Graph
     }
 
     /*reads the edges and vertices from the text file whose name is 
     specified by the parameter filename and place data in a Graph object */
-    private static Graph readGraphFromFile(String filename) {
-         //TODO: implement function
+    public static void readGraphFromFile(String filename) {
+         //TODO: implement function and make return type Graph
     }
 
     /* is a function that creates an edge object and passes the source vertex v, 
     the target vertex and w the vertex weight as parameters, 
     assigns the target vertex to the adjacent list  */
-    private static Edge makeEdge(Vertex target, Vertex source, int weight) {
-        //TODO: implement function
+    public static void makeEdge(Vertex target, Vertex source, int weight) {
+        //TODO: implement function and make return type Edge
     }
     
 

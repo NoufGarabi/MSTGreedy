@@ -15,7 +15,7 @@ public class Edge {
     public Edge() {
     }
 
-    // Constructor with all arguments
+    // Constructor with arguments
     public Edge(Vertex source, Vertex target, int weight) {
         this.source = source;
         this.target = target;

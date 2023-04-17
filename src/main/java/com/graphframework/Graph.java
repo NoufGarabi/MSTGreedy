@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-// A class to represent a graph
+// Class to represent a graph
 public class Graph {
 
     private final int verts; // number of vertices

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  *
- * The Vertex class represents a vertex in a graph. Each vertex has a label, a
+ * The Vertex class represents a vertex in a graph. Each vertex has a label,
  * visited flag to indicate whether it has been visited during a graph
  * traversal, and an adjacency list to keep track of its neighbors.
  */

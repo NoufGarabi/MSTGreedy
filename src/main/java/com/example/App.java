@@ -43,7 +43,7 @@ public class App
                 break;
             default:
                 System.out.println("Invalid choice!");
-                System.out.println("Thank you!");
+                System.out.println("Thank you");
                 break;
         }
 

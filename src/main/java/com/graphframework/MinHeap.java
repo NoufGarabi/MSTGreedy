@@ -1,7 +1,5 @@
 package com.graphframework;
 
-// Java Program to Implement Heaps
-// by Illustrating Min Heap
  
 // Main class (MinHeap)
 class MinHeap {
@@ -17,8 +15,6 @@ class MinHeap {
     // Constructor of this class
     public MinHeap(int maxsize)
     {
- 
-        // This keyword refers to current object itself
         this.maxsize = maxsize;
         this.size = 0;
  

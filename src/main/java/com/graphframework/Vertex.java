@@ -1,5 +1,4 @@
 package com.graphframework;
-
 import java.util.ArrayList;
 import java.util.List;
 /**

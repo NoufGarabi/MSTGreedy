@@ -5,7 +5,7 @@ package com.graphframework;
 class MinHeap {
  
     // Member variables of this class
-    private int[] Heap;
+    private Edge[] Heap;
     private int size;
     private int maxsize;
  
@@ -18,8 +18,9 @@ class MinHeap {
         this.maxsize = maxsize;
         this.size = 0;
  
-        Heap = new int[this.maxsize + 1];
-        Heap[0] = Integer.MIN_VALUE;
+        Heap = new Edge[this.maxsize + 1];
+        Edge e = new Edge(null, null, Integer.MIN_VALUE);
+        Heap[0] = e;
     }
  
     // Method 1
@@ -60,7 +61,7 @@ class MinHeap {
     private void swap(int fpos, int spos)
     {
  
-        int tmp;
+        Edge tmp;
         tmp = Heap[fpos];
  
         Heap[fpos] = Heap[spos];
@@ -77,11 +78,11 @@ class MinHeap {
        // to check if right child exists. Otherwise default value will be '0'
        // and that will be swapped with parent node.
        if(rightChild(pos)<=size)
-          swapPos = Heap[leftChild(pos)]<Heap[rightChild(pos)]?leftChild(pos):rightChild(pos);
+          swapPos = Heap[leftChild(pos)].getWeight() <Heap[rightChild(pos)].getWeight()?leftChild(pos):rightChild(pos);
        else
          swapPos= leftChild(pos);
         
-       if(Heap[pos]>Heap[leftChild(pos)] || Heap[pos]> Heap[rightChild(pos)]){
+       if(Heap[pos].getWeight() >Heap[leftChild(pos)].getWeight() || Heap[pos].getWeight() > Heap[rightChild(pos)].getWeight()){
          swap(pos,swapPos);
          minHeapify(swapPos);
        }
@@ -91,7 +92,7 @@ class MinHeap {
  
     // Method 7
     // To insert a node into the heap
-    public void insert(int element)
+    public void insert(Edge element)
     {
  
         if (size >= maxsize) {
@@ -101,7 +102,7 @@ class MinHeap {
         Heap[++size] = element;
         int current = size;
  
-        while (Heap[current] < Heap[parent(current)]) {
+        while (Heap[current].getWeight() < Heap[parent(current)].getWeight()) {
             swap(current, parent(current));
             current = parent(current);
         }
@@ -127,10 +128,10 @@ class MinHeap {
     // Method 9
     // To remove and return the minimum
     // element from the heap
-    public int remove()
+    public Edge remove()
     {
  
-        int popped = Heap[FRONT];
+        Edge popped = Heap[FRONT];
         Heap[FRONT] = Heap[size--];
         minHeapify(FRONT);
  

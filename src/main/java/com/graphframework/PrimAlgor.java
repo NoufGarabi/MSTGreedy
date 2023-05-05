@@ -6,6 +6,10 @@ class PrimAlgor extends MSTAlgor{
         super();
     }
 
+public static void MHPrimImplementation(){
+    int cost = 0; // count cost of MST
+    
+}
 
 
     @Override

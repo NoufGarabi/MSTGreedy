@@ -9,7 +9,7 @@ import java.util.Scanner;
 // Class to represent a graph
 public class Graph {
 
-    private final int verts; // number of vertices
+    private final int verticesNum; // number of vertices
     private final boolean digraph; // is the graph directed?
     private final List<Edge> edges; // list of edges in the graph
     private final List<Vertex> adjList; // adjacency list for each vertex
@@ -17,14 +17,14 @@ public class Graph {
 
     // Constructor to create a new graph with the given number of vertices and directed/undirected property
     public Graph(int numVerts, boolean isDirected) {
-        this.verts = numVerts;
+        this.verticesNum = numVerts;
         this.digraph = isDirected;
         this.edges = new ArrayList<>();
         this.adjList = new ArrayList<>();
 
         // Create a vertex for each number in the range [0, numVerts)
-        for (int i = 0; i < verts; i++) {
-            adjList.add(new Vertex(i));
+        for (int i = 0; i < verticesNum; i++) {
+            adjList.add(new Vertex(Integer.toString(i)));
         }
     }
 
@@ -52,7 +52,7 @@ public class Graph {
         Random randm = new Random();
 
         // Create a path of vertices with random weights
-        for (int i = 0; i < verts - 1; i++) {
+        for (int i = 0; i < verticesNum - 1; i++) {
             int weight = randm.nextInt(40) + 1;
             addEdge(adjList.get(i), adjList.get(i + 1), weight);
             if (!digraph) {
@@ -61,10 +61,10 @@ public class Graph {
         }
 
         // Create additional edges until the desired number is reached
-        int remEdges = edgeNo - (verts - 1);
+        int remEdges = edgeNo - (verticesNum - 1);
         for (int i = 0; i < remEdges; i++) {
-            int srcVert = randm.nextInt(verts);
-            int destVert = randm.nextInt(verts);
+            int srcVert = randm.nextInt(verticesNum);
+            int destVert = randm.nextInt(verticesNum);
 
             // If the source and destination vertices are the same or already connected, try again
             if (destVert == srcVert || isConnected(srcVert, destVert, adjList)) {
@@ -151,8 +151,8 @@ public class Graph {
     }
 
     // Getters
-    public int getVerts() {
-        return verts;
+    public int getVerticesNum() {
+        return verticesNum;
     }
 
     public List<Edge> getEdges() {

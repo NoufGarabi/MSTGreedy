@@ -1,140 +1,143 @@
 package com.graphframework;
 
- 
-// Main class (MinHeap)
+/**
+ * MinHeap class represents a minimum heap.
+ * It has a capacity, size, and an array of heap nodes.
+ */
 class MinHeap {
- 
-    // Member variables of this class
-    private Edge[] Heap;
-    private int size;
-    private int maxsize;
- 
-    // Initializing front as static with unity
-    private static final int FRONT = 1;
- 
-    // Constructor of this class
-    public MinHeap(int maxsize)
-    {
-        this.maxsize = maxsize;
-        this.size = 0;
- 
-        Heap = new Edge[this.maxsize + 1];
-        Edge e = new Edge(null, null, Integer.MIN_VALUE);
-        Heap[0] = e;
+    int capacity;
+    int size; // The current size
+    HeapNode[] heap;
+    int[] decreaseKey; // To decrease the key
+
+    /**
+     * MinHeap constructor.
+     * 
+     * @param capacity The maximum capacity of the heap.
+     */
+    public MinHeap(int capacity) {
+        this.capacity = capacity;
+        heap = new HeapNode[capacity + 1];
+        decreaseKey = new int[capacity];
+
+        // this node is a placeholder only 
+        heap[0] = new HeapNode();
+        heap[0].vertex = new Vertex("");
+        heap[0].key = Integer.MIN_VALUE;
+        heap[0].index = -1;
+        size = 0;
     }
- 
-    // Method 1
-    // Returning the position of
-    // the parent for the node currently
-    // at pos
-    private int parent(int pos) { return pos / 2; }
- 
-    // Method 2
-    // Returning the position of the
-    // left child for the node currently at pos
-    private int leftChild(int pos) { return (2 * pos); }
- 
-    // Method 3
-    // Returning the position of
-    // the right child for the node currently
-    // at pos
-    private int rightChild(int pos)
-    {
-        return (2 * pos) + 1;
+
+    /**
+     * Insert a heapNode into the heap.
+     * 
+     * @param node The node to be inserted.
+     */
+    public void insert(HeapNode node) {
+        heap[++size] = node;
+        decreaseKey[node.index] = size;
+        bubbleUp(size);
     }
- 
-    // Method 4
-    // Returning true if the passed
-    // node is a leaf node
-    private boolean isLeaf(int pos)
-    {
- 
-        if (pos > (size / 2)) {
-            return true;
-        }
- 
-        return false;
-    }
- 
-    // Method 5
-    // To swap two nodes of the heap
-    private void swap(int fpos, int spos)
-    {
- 
-        Edge tmp;
-        tmp = Heap[fpos];
- 
-        Heap[fpos] = Heap[spos];
-        Heap[spos] = tmp;
-    }
- 
-    // Method 6
-    // To heapify the node at pos
-   private void minHeapify(int pos)
-   {     
-     if(!isLeaf(pos)){
-       int swapPos= pos;
-       // swap with the minimum of the two children
-       // to check if right child exists. Otherwise default value will be '0'
-       // and that will be swapped with parent node.
-       if(rightChild(pos)<=size)
-          swapPos = Heap[leftChild(pos)].getWeight() <Heap[rightChild(pos)].getWeight()?leftChild(pos):rightChild(pos);
-       else
-         swapPos= leftChild(pos);
-        
-       if(Heap[pos].getWeight() >Heap[leftChild(pos)].getWeight() || Heap[pos].getWeight() > Heap[rightChild(pos)].getWeight()){
-         swap(pos,swapPos);
-         minHeapify(swapPos);
-       }
-        
-     }      
-   }
- 
-    // Method 7
-    // To insert a node into the heap
-    public void insert(Edge element)
-    {
- 
-        if (size >= maxsize) {
-            return;
-        }
- 
-        Heap[++size] = element;
-        int current = size;
- 
-        while (Heap[current].getWeight() < Heap[parent(current)].getWeight()) {
-            swap(current, parent(current));
-            current = parent(current);
+
+    /**
+     * Perform the bubble up operation to maintain the heap property.
+     * 
+     * @param position The position of the node.
+     */
+    public void bubbleUp(int position) {
+        int parentIdx = position / 2;
+        int currentIdx = position;
+        while (currentIdx > 0 && heap[parentIdx].key > heap[currentIdx].key) {
+            HeapNode currentNode = heap[currentIdx];
+            HeapNode parentNode = heap[parentIdx];
+            decreaseKey[currentNode.index] = parentIdx;
+            decreaseKey[parentNode.index] = currentIdx;
+            swap(currentIdx, parentIdx);
+            currentIdx = parentIdx;
+            parentIdx = parentIdx / 2;
         }
     }
- 
-    // Method 8
-    // To print the contents of the heap
-    public void print()
-    {
-        for (int i = 1; i <= size / 2; i++) {
- 
-            // Printing the parent and both childrens
-            System.out.print(
-                " PARENT : " + Heap[i]
-                + " LEFT CHILD : " + Heap[2 * i]
-                + " RIGHT CHILD :" + Heap[2 * i + 1]);
- 
-            // By here new line is required
-            System.out.println();
+
+    /**
+     * Extract the minimum node from the heap.
+     * 
+     * @return The minimum node.
+     */
+    public HeapNode extractMin() {
+        HeapNode min = heap[1];
+        HeapNode lastNode = heap[size];
+        decreaseKey[lastNode.index] = 1;
+        heap[1] = lastNode;
+        heap[size] = null;
+        sinkDown(1);
+        size--;
+        return min;
+    }
+
+    /**
+     * Perform the sink down operation to maintain the heap property.
+     * 
+     * @param position The position of the node.
+     */
+    public void sinkDown(int position) {
+        int theSmallest = position;
+        int leftChild = 2 * position;
+        int rightChild = 2 * position + 1;
+        if (leftChild < heapSize() && heap[theSmallest].key > heap[leftChild].key) {
+            theSmallest = leftChild;
+        }
+        if (rightChild < heapSize() && heap[theSmallest].key > heap[rightChild].key) {
+            theSmallest = rightChild;
+        }
+        if (theSmallest != position) {
+            HeapNode smallestNode = heap[theSmallest];
+            HeapNode positionNode = heap[position];
+            decreaseKey[smallestNode.index] = position;
+            decreaseKey[positionNode.index] = theSmallest;
+            swap(position, theSmallest);
+            sinkDown(theSmallest);
         }
     }
- 
-    // Method 9
-    // To remove and return the minimum
-    // element from the heap
-    public Edge remove()
-    {
- 
-        Edge popped = Heap[FRONT];
-        Heap[FRONT] = Heap[size--];
-        minHeapify(FRONT);
- 
-        return popped;
+
+    /**
+     * Check if the heap is empty.
+     * 
+     * @return true if the heap is empty, false otherwise.
+     */
+    public boolean isEmpty() {
+        return size == 0;
     }
+
+    /**
+     * Get the size of the heap.
+     * 
+     * @return The size of the heap.
+     * 
+     */
+    public int heapSize() {
+        return size;
+    }
+
+    /**
+     * Swap two nodes in the heap.
+     * 
+     * @param index1 The index of the first node.
+     * @param index2 The index of the second node.
+     */
+    public void swap(int index1, int index2) {
+        HeapNode temp = heap[index1];
+        heap[index1] = heap[index2];
+        heap[index2] = temp;
+    }
+
+    public void decreaseKey(int newKey, int id) {
+        //get the edges which key's needs the decrease;
+        int index = decreaseKey[id];
+
+        //get the node and update its value
+        HeapNode node = heap[index];
+        node.key = newKey;
+        bubbleUp(index);
+    }
+
 }

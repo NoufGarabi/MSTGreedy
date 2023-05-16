@@ -5,47 +5,57 @@ import java.util.List;
 import java.util.Set;
 
 class PrimAlgor extends MSTAlgor {
+    
 
     public PrimAlgor() {
         super();
     }
 
-    public static void MHPrimImplementation(Graph graph) {
-        int cost = 0; // count cost of MST
-        Set<Vertex> vistedVertcies = new HashSet<Vertex>(); // set to track visted vertcies
-        MinHeap minHeap = new MinHeap(graph.getVerts()); // min heap of edges
-        List<Vertex> vertcies = graph.getAdjList(); // get adj list of graph
-        List<Edge> edges = graph.getEdges();
+    public void MHPrimImplementation(Graph graph) {
 
-        // add first vertex of the graph to the min heap
-        minHeap.insert(new Edge(vertcies.get(1), vertcies.get(1), 0));
+        // get the number of vertcies from graph
+       int numOfVertcies = graph.getVerticesNum();
+       // get the adjList from graph
+       List<Vertex> adjList = graph.getAdjList();
 
-        // loop through vertcies and get min edges to add to MST
-        // loop runs for V - 1 which the min number of edges allowed for a
-        // graph to be acyclic and connected.
-        while (vistedVertcies.size() < graph.getVerts()) {
-            // get vertex with min cost from heap
-            Edge e = minHeap.remove();
-            int edgeCost = e.getWeight();
-            Vertex vertex = e.getSource();
+       // get edges of graph
+       List<Edge> edgesList = graph.getEdges();
 
-            // check if the vertex already exist in visted set
-            if (vistedVertcies.contains(vertex))
-                continue;
+       int result = 0; // track spanning tree cost
 
-            // add weight to cost calculator and vertex to visted set
-            cost += edgeCost;
-            vistedVertcies.add(vertex);
+       // keep track of visted vertcies
+       Set<Vertex> vistedVertcies = new HashSet<Vertex>();
+       MinHeap minHeap = new MinHeap(edgesList.size()); // create a new min heap
 
-            // loop through all vertcies connected to the vertex and add them to heap
-            for (int i = 0; i < edges.size(); i++) {
-                if (edges.get(i).getSource() == vertex && !vistedVertcies.contains(edges.get(i).getTarget()))
-                    minHeap.insert(edges.get(i));
-            }
+       //insert first vertex in the mean heap and give it a cost of 0
+       minHeap.insert(new HeapNode(adjList.get(0) ,0));
 
+       // fill min heap with all vertcies in the graph and assign them a cost of
+       // max value
+       for(int i=1; i<adjList.size(); i++){
+        minHeap.insert(new HeapNode(adjList.get(i), Integer.MAX_VALUE));
+       }
+
+       while(vistedVertcies.size() < numOfVertcies){
+        HeapNode poppedNode = minHeap.extractMin(); // extract min node from heap
+        Vertex poppVertex = poppedNode.getVertex(); // get vertex from node
+        int cost = poppedNode.getKey(); // get key from node
+
+        // if vertex is already visted skip it
+        if(vistedVertcies.contains(poppVertex))
+        continue;
+
+        result += cost;
+        vistedVertcies.add(poppVertex);
+
+        for(Edge e : edgesList){
+            if(e.getSource() == poppVertex && !vistedVertcies.contains(e.getTarget()))
+            minHeap.insert(new HeapNode(e.getTarget(), e.getWeight()));
         }
+       }
 
-        System.out.println(cost);
+       System.out.println(result);
+
 
     }
 

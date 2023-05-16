@@ -30,14 +30,8 @@ class PrimAlgor extends MSTAlgor {
        Set<Vertex> vistedVertcies = new HashSet<Vertex>();
        MinHeap minHeap = new MinHeap(edgesList.size()); // create a new min heap
 
-       //insert first vertex in the mean heap and give it a cost of 0
+       //insert first vertex in the min heap and give it a cost of 0
        minHeap.insert(new HeapNode(adjList.get(0) ,0));
-
-       // fill min heap with all vertcies in the graph and assign them a cost of
-       // max value
-    //    for(int i=1; i<adjList.size(); i++){
-    //     minHeap.insert(new HeapNode(adjList.get(i), Integer.MAX_VALUE));
-    //    }
 
        while(vistedVertcies.size() < numOfVertcies){
         HeapNode poppedNode = minHeap.extractMin(); // extract min node from heap
@@ -48,8 +42,10 @@ class PrimAlgor extends MSTAlgor {
         if(vistedVertcies.contains(poppedVertex))
         continue;
 
+        // Add cost to the result of the MST
         result += cost;
-        vistedVertcies.add(poppedVertex);
+        vistedVertcies.add(poppedVertex); // add vertex to visited vertcies set
+        poppedVertex.setVisited(true); // mark vertex to visited
 
         for(Edge e : edgesList) {
             Vertex source = e.getSource();

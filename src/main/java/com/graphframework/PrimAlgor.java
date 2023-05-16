@@ -1,14 +1,18 @@
 package com.graphframework;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 class PrimAlgor extends MSTAlgor {
+    List<Vertex> minSpaningTree;
     
 
     public PrimAlgor() {
         super();
+        minSpaningTree =  new ArrayList<>();
     }
 
     public void MHPrimImplementation(Graph graph) {
@@ -32,9 +36,9 @@ class PrimAlgor extends MSTAlgor {
 
        // fill min heap with all vertcies in the graph and assign them a cost of
        // max value
-       for(int i=1; i<adjList.size(); i++){
-        minHeap.insert(new HeapNode(adjList.get(i), Integer.MAX_VALUE));
-       }
+    //    for(int i=1; i<adjList.size(); i++){
+    //     minHeap.insert(new HeapNode(adjList.get(i), Integer.MAX_VALUE));
+    //    }
 
        while(vistedVertcies.size() < numOfVertcies){
         HeapNode poppedNode = minHeap.extractMin(); // extract min node from heap
@@ -48,14 +52,23 @@ class PrimAlgor extends MSTAlgor {
         result += cost;
         vistedVertcies.add(poppVertex);
 
-        for(Edge e : edgesList){
-            if(e.getSource() == poppVertex && !vistedVertcies.contains(e.getTarget()))
-            minHeap.insert(new HeapNode(e.getTarget(), e.getWeight()));
+        for(Edge e : edgesList) {
+            Vertex source = e.getSource();
+            Vertex target = e.getTarget();
+
+            if(source == poppVertex && !vistedVertcies.contains(target)) {
+                minHeap.insert(new HeapNode(target, e.getWeight()));
+            } else if(target == poppVertex && !vistedVertcies.contains(source)) {
+                minHeap.insert(new HeapNode(source, e.getWeight()));
+            }
         }
        }
 
        System.out.println(result);
-
+    //    Iterator<Vertex> vistedVirtcesIterator = vistedVertcies.iterator();
+    //    while(vistedVirtcesIterator.hasNext()){
+    //     System.out.println(vistedVirtcesIterator.next().getLabel());
+    //    }
 
     }
 

@@ -1,5 +1,7 @@
 package com.graphframework;
 
+import java.util.Arrays;
+
 /**
  * MinHeap class represents a minimum heap.
  * It has a capacity, size, and an array of heap nodes.
@@ -25,6 +27,8 @@ class MinHeap {
         heap[0].vertex = new Vertex("");
         heap[0].key = Integer.MIN_VALUE;
         heap[0].index = -1;
+        decreaseKey = new int[capacity];
+        Arrays.fill(decreaseKey, -1); // Initialize all elements with -1
         size = 0;
     }
 
@@ -128,7 +132,10 @@ class MinHeap {
         HeapNode temp = heap[index1];
         heap[index1] = heap[index2];
         heap[index2] = temp;
+        decreaseKey[heap[index1].index] = index1;
+        decreaseKey[heap[index2].index] = index2;
     }
+    
 
     public void decreaseKey(int newKey, int id) {
         //get the edges which key's needs the decrease;

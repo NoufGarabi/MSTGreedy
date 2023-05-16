@@ -41,33 +41,29 @@ class PrimAlgor extends MSTAlgor {
 
        while(vistedVertcies.size() < numOfVertcies){
         HeapNode poppedNode = minHeap.extractMin(); // extract min node from heap
-        Vertex poppVertex = poppedNode.getVertex(); // get vertex from node
+        Vertex poppedVertex = poppedNode.getVertex(); // get vertex from node
         int cost = poppedNode.getKey(); // get key from node
 
         // if vertex is already visted skip it
-        if(vistedVertcies.contains(poppVertex))
+        if(vistedVertcies.contains(poppedVertex))
         continue;
 
         result += cost;
-        vistedVertcies.add(poppVertex);
+        vistedVertcies.add(poppedVertex);
 
         for(Edge e : edgesList) {
             Vertex source = e.getSource();
             Vertex target = e.getTarget();
 
-            if(source == poppVertex && !vistedVertcies.contains(target)) {
+            if(source == poppedVertex && !vistedVertcies.contains(target)) {
                 minHeap.insert(new HeapNode(target, e.getWeight()));
-            } else if(target == poppVertex && !vistedVertcies.contains(source)) {
+            } else if(target == poppedVertex && !vistedVertcies.contains(source)) {
                 minHeap.insert(new HeapNode(source, e.getWeight()));
             }
         }
        }
 
        System.out.println(result);
-    //    Iterator<Vertex> vistedVirtcesIterator = vistedVertcies.iterator();
-    //    while(vistedVirtcesIterator.hasNext()){
-    //     System.out.println(vistedVirtcesIterator.next().getLabel());
-    //    }
 
     }
 

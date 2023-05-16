@@ -10,17 +10,16 @@ public class KruskalAlg extends MSTAlgor {
 
     // Constructer
     public KruskalAlg(int v, int e, Graph g) {
-        super(result);
         V = v;
         E = e;
         edges = g.getEdges();
     }
 
     // To return the subset that contain i
-    public int find(int[] parent, int i) {
-        if (parent[i] == i)
-            return i;
-        return find(parent, parent[i]);
+    public int find(int[] parent, int x) {
+        if (parent[x] == x)
+            return x;
+        return find(parent, parent[x]);
     }
 
     // To construct union of the disjoint
@@ -75,8 +74,8 @@ public class KruskalAlg extends MSTAlgor {
         while (e < V - 1) {
             Edge next_edge = edges.get(i++);
 
-            int x = find(parent, next_edge.getSource().getLabel());
-            int y = find(parent, next_edge.getTarget().getLabel());
+            int x = find(parent, Integer.parseInt(next_edge.getSource().getLabel()));
+            int y = find(parent, Integer.parseInt(next_edge.getTarget().getLabel()));
 
             if (x != y) {
                 result[e++] = next_edge;

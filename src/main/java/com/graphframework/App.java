@@ -1,12 +1,9 @@
-package com.example;
+package com.graphframework;
 
 import java.io.IOException;
 import java.util.Scanner;
-
-
 import com.graphframework.Graph;
 import com.graphframework.KruskalAlg;
-
 
 public class App 
 {
@@ -51,7 +48,8 @@ public class App
         }
 
         // Read graph from file
-      // Graph graph = Graph.readGraphFromFile("GraphFile.txt");
+        Graph graph = Graph.readGraphFromFile("GraphFile.txt");
+
     }
 
     public static void graphGenerate(int vertexNo, int edgeNo) {
@@ -62,5 +60,9 @@ public class App
 
         KruskalAlg m = new KruskalAlg(vertexNo, edgeNo, graph);
         m.kruskalMST();
+
+        PrimAlgor prim = new PrimAlgor();
+        prim.MHPrimImplementation(graph);
+
     }
 }

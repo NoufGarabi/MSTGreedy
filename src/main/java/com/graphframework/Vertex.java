@@ -1,5 +1,4 @@
 package com.graphframework;
-
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -10,7 +9,7 @@ import java.util.List;
  */
 public class Vertex {
 
-    private int label; // the label of the vertex
+    private String label; // the label of the vertex
     private boolean isVisited; // flag to indicate whether the vertex has been visited
     private List<Vertex> adjList; // the adjacency list of the vertex
 
@@ -27,7 +26,7 @@ public class Vertex {
      *
      * @param label the label of the vertex
      */
-    public Vertex(int label) {
+    public Vertex(String label) {
         this.label = label;
         this.isVisited = false;
         this.adjList = new ArrayList<>();
@@ -38,7 +37,7 @@ public class Vertex {
      *
      * @return the label of the vertex
      */
-    public int getLabel() {
+    public String getLabel() {
         return label;
     }
 
@@ -47,7 +46,7 @@ public class Vertex {
      *
      * @param label the label to set for the vertex
      */
-    public void setLabel(int label) {
+    public void setLabel(String label) {
         this.label = label;
     }
 

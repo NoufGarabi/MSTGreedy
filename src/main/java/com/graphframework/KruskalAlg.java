@@ -102,8 +102,7 @@ public class KruskalAlg extends MSTAlgor {
         int minimumCost = 0;
 
         for (int i = 0; i < V - 1; i++) {
-            System.out.println(result[i].getSource().getLabel() + " -- " + result[i].getTarget().getLabel() + " == "
-                    + result[i].getWeight());
+            result[i].displayInfo();
             minimumCost += result[i].getWeight();
 
         }

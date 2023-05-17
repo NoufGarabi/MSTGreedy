@@ -62,7 +62,8 @@ class PrimAlgor extends MSTAlgor {
     
        }
     }
-       System.out.println(result);
+       System.out.println("Minmum cost is:" + result);
+       displayResultingMST();
 
     }
 

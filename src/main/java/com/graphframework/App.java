@@ -56,6 +56,7 @@ public class App {
         KruskalAlg m = new KruskalAlg(vertexNo, edgeNo, graph);
         m.kruskalMST();
 
+        System.out.println("=============== Prims Algorithm ================");
         PrimAlgor prim = new PrimAlgor();
         prim.MHPrimImplementation(graph);
     }

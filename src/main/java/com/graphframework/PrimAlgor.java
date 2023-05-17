@@ -68,8 +68,8 @@ class PrimAlgor extends MSTAlgor {
 
     @Override
     public void displayResultingMST() {
-        for (Edge e : MSTResultList){
-            e.displayInfo();
+        for (int i = 1; i< MSTResultList.size(); i++){
+            MSTResultList.get(i).displayInfo();
         }
     }
 

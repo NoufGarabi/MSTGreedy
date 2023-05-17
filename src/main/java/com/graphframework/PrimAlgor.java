@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 class PrimAlgor extends MSTAlgor {
-    List<Vertex> minSpaningTree;
+    List<Edge> minSpaningTree;
     
 
     public PrimAlgor() {

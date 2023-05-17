@@ -3,6 +3,7 @@ package com.graphframework;
 public class HeapNode {
         Vertex vertex;
         int key;
+        Edge edge;
         int index;
 
 
@@ -35,6 +36,14 @@ public class HeapNode {
 
         public void setIndex(int id) {
             this.index = id;
+        }
+
+        public Edge getEdge() {
+            return edge;
+        }
+
+        public void setEdge(Edge edge) {
+            this.edge = edge;
         }
       
 

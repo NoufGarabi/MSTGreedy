@@ -44,7 +44,7 @@ public class App {
 
 
         // Read graph from file
-        Graph graph = Graph.readGraphFromFile("GraphFile.txt");
+        // Graph graph = Graph.readGraphFromFile("GraphFile.txt");
     }
 
     public static void graphGenerate(int vertexNo, int edgeNo) {

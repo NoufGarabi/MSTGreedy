@@ -49,9 +49,9 @@ public class Edge {
 
     // Display information about the Edge
     public void displayInfo() {
-        System.out.println("Edge information:");
-        System.out.println("Source vertex: " + getSource());
-        System.out.println("Target vertex: " + getTarget());
-        System.out.println("Edge weight: " + getWeight());
+        // System.out.println("Edge information:");
+        System.out.print("Source vertex: " + getSource().getLabel());
+        System.out.print(" Target vertex: " + getTarget());
+        System.out.println(" Edge weight: " + getWeight());
     }
 }

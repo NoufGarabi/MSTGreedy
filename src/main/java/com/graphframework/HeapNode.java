@@ -9,9 +9,10 @@ public class HeapNode {
 
         public HeapNode(){}
 
-        public HeapNode(Vertex vertex, int key) {
+        public HeapNode(Vertex vertex, int key, Edge edge) {
             this.vertex = vertex;
             this.key = key;
+            this.edge = edge;
         }
 
         public Vertex getVertex() {

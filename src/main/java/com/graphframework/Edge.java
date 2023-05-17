@@ -23,7 +23,7 @@ public class Edge {
     }
 
     // Getter and Setter methods for source, target, and weight
-    public Vertex getSource() {
+    public Office getSource() {
         return source;
     }
 
@@ -31,7 +31,7 @@ public class Edge {
         this.source = source;
     }
 
-    public Vertex getTarget() {
+    public Office getTarget() {
         return target;
     }
 

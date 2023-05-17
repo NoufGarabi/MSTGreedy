@@ -4,9 +4,11 @@ package com.graphframework;
 import java.util.List;
 
 public class KruskalAlg extends MSTAlgor {
+
     public int V, E;
     public static List<Line> edges;
     public static Edge[] result;
+    public static boolean isVisited;
 
     // Constructer
     public KruskalAlg(int v, int e, Graph g) {
@@ -17,8 +19,9 @@ public class KruskalAlg extends MSTAlgor {
 
     // To return the subset that contain i
     public int find(int[] parent, int x) {
-        if (parent[x] == x)
+        if (parent[x] == x) {
             return x;
+        }
         return find(parent, parent[x]);
     }
 
@@ -27,11 +30,11 @@ public class KruskalAlg extends MSTAlgor {
         int xroot = find(parent, x);
         int yroot = find(parent, y);
 
-        if (rank[xroot] < rank[yroot])
+        if (rank[xroot] < rank[yroot]) {
             parent[xroot] = yroot;
-        else if (rank[xroot] > rank[yroot])
+        } else if (rank[xroot] > rank[yroot]) {
             parent[yroot] = xroot;
-        else {
+        } else {
             parent[yroot] = xroot;
             rank[xroot]++;
         }
@@ -41,8 +44,10 @@ public class KruskalAlg extends MSTAlgor {
         result = new Line[V];
         int e = 0;
         int i = 0;
+
         for (i = 0; i < V; ++i)
             result[i] = new Line();
+
 
         // Sort the array
         for (int z = 0; z < edges.size(); z++) {
@@ -59,7 +64,6 @@ public class KruskalAlg extends MSTAlgor {
         // for (int j = 0; j < edges.size(); j++) {
         // System.out.println(edges.get(j).getWeight());
         // }
-
         // Array to find the parent, rank of the vertice
         int[] parent = new int[V];
         int[] rank = new int[V];
@@ -78,15 +82,17 @@ public class KruskalAlg extends MSTAlgor {
             int y = find(parent, Integer.parseInt(next_edge.getTarget().getLabel()));
 
             if (x != y) {
+                next_edge.getTarget().setVisited(true);
+                next_edge.getSource().setVisited(true);
                 result[e++] = next_edge;
                 union(parent, rank, x, y);
+
             }
         }
 
         // for (int j = 0; j < V - 1; j++) {
         // result[j].displayInfo();
         // }
-
         displayResultingMST();
     }
 
@@ -97,8 +103,7 @@ public class KruskalAlg extends MSTAlgor {
         int minimumCost = 0;
 
         for (int i = 0; i < V - 1; i++) {
-            System.out.println(result[i].getSource().getLabel() + " -- " + result[i].getTarget().getLabel() + " == "
-                    + result[i].getWeight());
+            result[i].displayInfo();
             minimumCost += result[i].getWeight();
 
         }

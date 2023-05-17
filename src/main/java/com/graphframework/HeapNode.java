@@ -1,24 +1,26 @@
 package com.graphframework;
 
 public class HeapNode {
-        Vertex vertex;
+        Office office;
         int key;
         int index;
+        Line line;
 
 
         public HeapNode(){}
 
-        public HeapNode(Vertex vertex, int key) {
-            this.vertex = vertex;
+        public HeapNode(Office vertex, int key, Line edge) {
+            this.office = vertex;
             this.key = key;
+            this.line = edge;
         }
 
-        public Vertex getVertex() {
-            return vertex;
+        public Office getOffice() {
+            return office;
         }
 
-        public void setVertex(Vertex vertex) {
-            this.vertex = vertex;
+        public void setOffice(Office office) {
+            this.office = office;
         }
 
         public int getKey() {
@@ -35,6 +37,14 @@ public class HeapNode {
 
         public void setIndex(int id) {
             this.index = id;
+        }
+
+        public Line getLine() {
+            return line;
+        }
+
+        public void setLine(Line line) {
+            this.line = line;
         }
       
 

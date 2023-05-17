@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class App {
     static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) throws IOException {
 
         // Print header
@@ -42,6 +41,10 @@ public class App {
                 System.out.println("Thank you");
                 break;
         }
+
+
+        // Read graph from file
+        Graph graph = Graph.readGraphFromFile("GraphFile.txt");
     }
 
     public static void graphGenerate(int vertexNo, int edgeNo) {

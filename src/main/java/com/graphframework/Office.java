@@ -8,9 +8,9 @@ public class Office extends Vertex {
 
     @Override
     public void setLabel(String label) {
-        if (!label.matches("^O\\d+$")) {
-            throw new IllegalArgumentException("Office label must start with 'O' followed by a unique number");
-        }
+        // if (!label.matches("^O\\d+$")) {
+        //     throw new IllegalArgumentException("Office label must start with 'O' followed by a unique number");
+        // }
         super.setLabel(label);
     }
 

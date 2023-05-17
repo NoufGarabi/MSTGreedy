@@ -1,6 +1,7 @@
 package com.graphframework;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * The Vertex class represents a vertex in a graph. Each vertex has a label,
@@ -13,9 +14,8 @@ public class Vertex {
     private boolean isVisited; // flag to indicate whether the vertex has been visited
     private List<Vertex> adjList; // the adjacency list of the vertex
 
-    /**
-     * Default constructor for Vertex class.
-     */
+
+    // Default constructor for Vertex class.
     public Vertex() {
     }
 
@@ -23,8 +23,6 @@ public class Vertex {
      * Constructor for Vertex class that sets the label of the vertex and
      * initializes its visited flag to false and its adjacency list to an empty
      * ArrayList.
-     *
-     * @param label the label of the vertex
      */
     public Vertex(String label) {
         this.label = label;
@@ -32,64 +30,43 @@ public class Vertex {
         this.adjList = new ArrayList<>();
     }
 
-    /**
-     * Returns the label of the vertex.
-     *
-     * @return the label of the vertex
-     */
+
+    // Returns the label of the vertex.
     public String getLabel() {
         return label;
     }
 
-    /**
-     * Sets the label of the vertex.
-     *
-     * @param label the label to set for the vertex
-     */
+    // Sets the label of the vertex.
     public void setLabel(String label) {
         this.label = label;
     }
 
-    /**
-     * Returns the visited flag of the vertex.
-     *
-     * @return the visited flag of the vertex
-     */
+
+    // Returns the visited flag of the vertex.
     public boolean isVisited() {
         return isVisited;
     }
 
-    /**
-     * Sets the visited flag of the vertex.
-     *
-     * @param visited the value to set for the visited flag of the vertex
-     */
+   
+    // Sets the visited flag of the vertex.
     public void setVisited(boolean visited) {
         isVisited = visited;
     }
 
-    /**
-     * Returns the adjacency list of the vertex.
-     *
-     * @return the adjacency list of the vertex
-     */
+    
+    // Returns the adjacency list of the vertex.
     public List<Vertex> getAdjList() {
         return adjList;
     }
 
-    /**
-     * Adds a vertex to the adjacency list of the vertex.
-     *
-     * @param vertex the vertex to add to the adjacency list
-     */
+   
+    // Adds a vertex to the adjacency list of the vertex.
     public void addToAdjList(Vertex vertex) {
         adjList.add(vertex);
     }
 
-    /**
-     * Prints information about the vertex, including its label, visited flag,
-     * and adjacency list.
-     */
+
+    // Prints information about the vertex, including its label, visited flag, and adjacency list.
     public void displayInfo() {
         System.out.println("Vertex " + label + " is visited: " + isVisited);
         System.out.print("Adjacent list: ");

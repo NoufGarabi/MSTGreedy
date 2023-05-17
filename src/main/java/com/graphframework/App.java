@@ -1,17 +1,15 @@
 package com.graphframework;
-
 import java.io.IOException;
 import java.util.Scanner;
 
-public class App 
-{
-     static Scanner scanner = new Scanner(System.in);
+public class App {
+    static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
 
         // Print header
         System.out.println("\t ======== Comparison of two of the minimum-spanning-tree algorithms ========\n");
-        System.out.println("\t\t\t\tKruskal and min-heap- based Prim\n");
+        System.out.println("\t\t\t\tKruskal and min-heap-based Prim\n");
 
         // Prompt user for input
         System.out.println("Choose a graph to generate:");
@@ -44,15 +42,11 @@ public class App
                 System.out.println("Thank you");
                 break;
         }
-
-        // Read graph from file
-        //Graph graph = Graph.readGraphFromFile("GraphFile.txt");
-
     }
 
     public static void graphGenerate(int vertexNo, int edgeNo) {
         // Create graph and print it
-        Graph graph = new Graph(vertexNo, false);
+        BluePrintsGraph graph = new BluePrintsGraph(vertexNo, false);
         graph.makeGraph(graph);
         graph.printGraph();
 
@@ -61,6 +55,5 @@ public class App
 
         PrimAlgor prim = new PrimAlgor();
         prim.MHPrimImplementation(graph);
-
     }
 }

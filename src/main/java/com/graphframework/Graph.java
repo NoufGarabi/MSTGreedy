@@ -6,8 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-// Class to represent a graph
-public class Graph {
+public abstract class Graph {
 
     private final int verticesNum; // number of vertices
     private final boolean digraph; // is the graph directed?
@@ -15,7 +14,8 @@ public class Graph {
     private final List<Vertex> adjList; // adjacency list for each vertex
     private int edgeNo = 0; // number of edges in the graph
 
-    // Constructor to create a new graph with the given number of vertices and directed/undirected property
+    // Constructor to create a new graph with the given number of vertices and
+    // directed/undirected property
     public Graph(int numVerts, boolean isDirected) {
         this.verticesNum = numVerts;
         this.digraph = isDirected;
@@ -24,13 +24,14 @@ public class Graph {
 
         // Create a vertex for each number in the range [0, numVerts)
         for (int i = 0; i < verticesNum; i++) {
-            adjList.add(new Vertex(Integer.toString(i)));
+            adjList.add(createVertex(Integer.toString(i)));
         }
     }
 
-    // Method to add an edge to the graph between the given vertices with the given weight
+    // Method to add an edge to the graph between the given vertices with the given
+    // weight
     public void addEdge(Vertex v, Vertex u, int w) {
-        Edge e = new Edge(v, u, w);
+        Edge e = createEdge(v, u, w);
         v.addToAdjList(u);
 
         // If the graph is undirected, add a reverse edge as well
@@ -47,6 +48,12 @@ public class Graph {
         }
     }
 
+    // Abstract method to create a vertex
+    protected abstract Vertex createVertex(String label);
+
+    // Abstract method to create an edge
+    protected abstract Edge createEdge(Vertex v, Vertex u, int weight);
+
     // Method to generate a random graph with the given number of edges
     public void makeGraph(Graph graph) {
         Random randm = new Random();
@@ -56,7 +63,8 @@ public class Graph {
             int weight = randm.nextInt(40) + 1;
             addEdge(adjList.get(i), adjList.get(i + 1), weight);
             if (!digraph) {
-                addEdge(adjList.get(i + 1), adjList.get(i), weight); // if the graph is undirected, add a reverse edge as well
+                addEdge(adjList.get(i + 1), adjList.get(i), weight); // if the graph is undirected, add a reverse edge
+                                                                     // as well
             }
         }
 
@@ -66,7 +74,8 @@ public class Graph {
             int srcVert = randm.nextInt(verticesNum);
             int destVert = randm.nextInt(verticesNum);
 
-            // If the source and destination vertices are the same or already connected, try again
+            // If the source and destination vertices are the same or already connected, try
+            // again
             if (destVert == srcVert || isConnected(srcVert, destVert, adjList)) {
                 i--;
                 continue;
@@ -108,43 +117,54 @@ public class Graph {
 
     // Reads graph data from a file and constructs a Graph object from it.
     public static Graph readGraphFromFile(String fileName) {
-    try {
-        // Open the file and create a scanner to read from it
-        File file = new File(fileName);
-        Scanner scanner = new Scanner(file);
+        try {
+            // Open the file and create a scanner to read from it
+            File file = new File(fileName);
+            Scanner scanner = new Scanner(file);
 
-        // Read the first line to determine if the graph is directed or undirected
-        boolean isDirected = false;
-        String[] firstLine = scanner.nextLine().split(" ");
-        if (firstLine[0].equals("digraph") && firstLine[1].equals("1")) {
-            isDirected = true;
+            // Read the first line to determine if the graph is directed or undirected
+            boolean isDirected = false;
+            String[] firstLine = scanner.nextLine().split(" ");
+            if (firstLine[0].equals("digraph") && firstLine[1].equals("1")) {
+                isDirected = true;
+            }
+
+            // Read the second line to determine the number of vertices and edges
+            String[] secondLine = scanner.nextLine().split(" ");
+            int numVerts = Integer.parseInt(secondLine[0]);
+            int numEdges = Integer.parseInt(secondLine[1]);
+
+            // Create a new Graph object with the given number of vertices and
+            // directed/undirected property
+            Graph graph = new Graph(numVerts, isDirected) {
+                @Override
+                protected Vertex createVertex(String label) {
+                    return new Office(label);
+                }
+
+                @Override
+                protected Edge createEdge(Vertex v, Vertex u, int weight) {
+                    return new Line(v, u, weight);
+                }
+            };
+
+            // Read the remaining lines to add edges to the graph
+            for (int i = 0; i < numEdges; i++) {
+                String[] line = scanner.nextLine().split(" ");
+                Vertex v = graph.getAdjList().get(line[0].charAt(0) - 'A');
+                Vertex u = graph.getAdjList().get(line[1].charAt(0) - 'A');
+                int weight = Integer.parseInt(line[2]);
+                graph.addEdge(v, u, weight);
+            }
+
+            scanner.close();
+            return graph;
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + fileName);
+            return null;
         }
-
-        // Read the second line to determine the number of vertices and edges
-        String[] secondLine = scanner.nextLine().split(" ");
-        int numVerts = Integer.parseInt(secondLine[0]);
-        int numEdges = Integer.parseInt(secondLine[1]);
-
-        // Create a new Graph object with the given number of vertices and directed/undirected property
-        Graph graph = new Graph(numVerts, isDirected);
-
-        // Read the remaining lines to add edges to the graph
-        for (int i = 0; i < numEdges; i++) {
-            String[] line = scanner.nextLine().split(" ");
-            Vertex v = graph.getAdjList().get(line[0].charAt(0) - 'A');
-            Vertex u = graph.getAdjList().get(line[1].charAt(0) - 'A');
-            int weight = Integer.parseInt(line[2]);
-            graph.addEdge(v, u, weight);
-        }
-
-        scanner.close();
-        return graph;
-
-    } catch (FileNotFoundException e) {
-        System.out.println("File not found: " + fileName);
-        return null;
     }
-}
 
     public boolean isDigraph() {
         return digraph;

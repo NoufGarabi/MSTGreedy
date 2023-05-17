@@ -31,11 +31,13 @@ class PrimAlgor extends MSTAlgor {
        MinHeap minHeap = new MinHeap(edgesList.size()); // create a new min heap
 
        //insert first vertex in the min heap and give it a cost of 0
-       minHeap.insert(new HeapNode(adjList.get(0) ,0));
+       Vertex firstVertex = adjList.get(0); // get first vertex from adj list
+       minHeap.insert(new HeapNode(firstVertex ,0,new Edge(firstVertex, firstVertex, 0)));
 
        while(vistedVertcies.size() < numOfVertcies){
         HeapNode poppedNode = minHeap.extractMin(); // extract min node from heap
         Vertex poppedVertex = poppedNode.getVertex(); // get vertex from node
+        Edge poppEdge = poppedNode.getEdge();
         int cost = poppedNode.getKey(); // get key from node
 
         // if vertex is already visted skip it
@@ -46,26 +48,29 @@ class PrimAlgor extends MSTAlgor {
         result += cost;
         vistedVertcies.add(poppedVertex); // add vertex to visited vertcies set
         poppedVertex.setVisited(true); // mark vertex to visited
+        minSpaningTree.add(poppEdge); // add min edge to MST
 
         for(Edge e : edgesList) {
             Vertex source = e.getSource();
             Vertex target = e.getTarget();
 
             if(source == poppedVertex && !vistedVertcies.contains(target)) {
-                minHeap.insert(new HeapNode(target, e.getWeight()));
+                minHeap.insert(new HeapNode(target, e.getWeight(), e));
             } else if(target == poppedVertex && !vistedVertcies.contains(source)) {
-                minHeap.insert(new HeapNode(source, e.getWeight()));
+                minHeap.insert(new HeapNode(source, e.getWeight(),e));
             }
-        }
+    
        }
-
+    }
        System.out.println(result);
 
     }
 
     @Override
     public void displayResultingMST() {
-        throw new UnsupportedOperationException("Unimplemented method 'displayResultingMST'");
+        for (Edge e : minSpaningTree){
+            e.displayInfo();
+        }
     }
 
 }

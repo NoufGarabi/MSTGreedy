@@ -38,6 +38,7 @@ class PrimAlgor extends MSTAlgor {
         HeapNode poppedNode = minHeap.extractMin(); // extract min node from heap
         Office poppedVertex = poppedNode.getOffice(); // get vertex from node
         Line poppEdge = poppedNode.getLine();
+
         int cost = poppedNode.getKey(); // get key from node
 
         // if vertex is already visted skip it

@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 class PrimAlgor extends MSTAlgor {
-    List<Edge> minSpaningTree;
+    List<Edge> MSTResultList;
     
 
     public PrimAlgor() {
         super();
-        minSpaningTree =  new ArrayList<>();
+        MSTResultList =  new ArrayList<>();
     }
 
     public void MHPrimImplementation(Graph graph) {
@@ -29,10 +29,9 @@ class PrimAlgor extends MSTAlgor {
        // keep track of visted vertcies
        Set<Vertex> vistedVertcies = new HashSet<Vertex>();
        MinHeap minHeap = new MinHeap(edgesList.size()); // create a new min heap
-
        //insert first vertex in the min heap and give it a cost of 0
        Vertex firstVertex = adjList.get(0); // get first vertex from adj list
-       minHeap.insert(new HeapNode(firstVertex ,0,new Edge(firstVertex, firstVertex, 0)));
+       minHeap.insert(new HeapNode(firstVertex ,0,graph.createEdge(firstVertex, firstVertex, 0)));
 
        while(vistedVertcies.size() < numOfVertcies){
         HeapNode poppedNode = minHeap.extractMin(); // extract min node from heap
@@ -48,7 +47,7 @@ class PrimAlgor extends MSTAlgor {
         result += cost;
         vistedVertcies.add(poppedVertex); // add vertex to visited vertcies set
         poppedVertex.setVisited(true); // mark vertex to visited
-        minSpaningTree.add(poppEdge); // add min edge to MST
+        MSTResultList.add(poppEdge); // add min edge to MST
 
         for(Edge e : edgesList) {
             Vertex source = e.getSource();
@@ -69,7 +68,7 @@ class PrimAlgor extends MSTAlgor {
 
     @Override
     public void displayResultingMST() {
-        for (Edge e : minSpaningTree){
+        for (Edge e : MSTResultList){
             e.displayInfo();
         }
     }

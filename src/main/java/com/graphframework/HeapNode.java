@@ -3,6 +3,7 @@ package com.graphframework;
 public class HeapNode {
         Office office;
         int key;
+        Edge edge;
         int index;
         Line line;
 
@@ -45,6 +46,7 @@ public class HeapNode {
 
         public void setLine(Line line) {
             this.line = line;
+
         }
       
 

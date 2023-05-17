@@ -10,12 +10,12 @@ public class HeapNode {
 
         public HeapNode(){}
 
+
         public HeapNode(Office vertex, int key, Line edge) {
             this.office = vertex;
             this.key = key;
             this.line = edge;
         }
-
         public Office getOffice() {
             return office;
         }

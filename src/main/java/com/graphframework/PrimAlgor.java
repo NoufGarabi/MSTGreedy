@@ -12,13 +12,17 @@ import com.phonenetworkapp.Line;
 import com.phonenetworkapp.Office;
 
 public class PrimAlgor extends MSTAlgor {
-List<Edge> MSTResultList;/**
+List<Edge> MSTResultList;
+int result;
+/**
+
 * Constructs a new PrimAlgor object.
 * Initializes the MSTResultList as an empty ArrayList.
 */
 public PrimAlgor() {
    super();
    MSTResultList =  new ArrayList<>();
+    result = 0;
 }
 
 /**
@@ -35,8 +39,6 @@ public List<Edge> MHPrimImplementation(Graph graph) {
 
    // Get the edges of the graph
    List<Line> edgesList = graph.getEdges();
-
-   int result = 0; // Track the spanning tree cost
 
    // Keep track of visited vertices
    Set<Vertex> visitedVertices = new HashSet<Vertex>();
@@ -80,7 +82,9 @@ return MSTResultList;
 */
 @Override
 public void displayResultingMST() {
+
    System.out.println("Following are the edges in the constructed MST (Prim Algorithm)");
+   System.out.println("The minimmum spanning tree cost: " + result);
    for (int i = 1; i < MSTResultList.size(); i++) {
        MSTResultList.get(i).displayInfo();
    }

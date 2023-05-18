@@ -2,7 +2,7 @@ package com.graphframework;
 
 import java.util.Arrays;
 
-import com.PhoneNetworkApp.Office;
+import com.phonenetworkapp.Office;
 
 /**
  * MinHeap class represents a minimum heap.

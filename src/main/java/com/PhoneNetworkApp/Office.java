@@ -1,4 +1,4 @@
-package com.PhoneNetworkApp;
+package com.phonenetworkapp;
 
 import com.graphframework.Vertex;
 

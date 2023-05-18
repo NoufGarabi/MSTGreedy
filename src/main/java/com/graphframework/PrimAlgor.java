@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.PhoneNetworkApp.Line;
-import com.PhoneNetworkApp.Office;
+import com.phonenetworkapp.Line;
+import com.phonenetworkapp.Office;
 
 class PrimAlgor extends MSTAlgor {
     List<Edge> MSTResultList;

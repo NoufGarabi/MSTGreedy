@@ -2,7 +2,7 @@ package com.graphframework;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.PhoneNetworkApp.Office;
+import com.phonenetworkapp.Office;
 
 /**
  *

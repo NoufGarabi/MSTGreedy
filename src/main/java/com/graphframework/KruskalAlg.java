@@ -45,6 +45,7 @@ public class KruskalAlg extends MSTAlgor {
         int e = 0;
         int i = 0;
 
+
         for (i = 0; i < V; ++i)
             result[i] = new Line();
 

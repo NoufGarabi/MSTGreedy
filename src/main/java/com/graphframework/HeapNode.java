@@ -46,7 +46,6 @@ public class HeapNode {
 
         public void setLine(Line line) {
             this.line = line;
-
         }
       
 

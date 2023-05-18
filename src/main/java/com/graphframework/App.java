@@ -58,7 +58,9 @@ public class App {
         m.kruskalMST();
 
         System.out.println();
-        System.out.println("=========== Prim ================");
+
+        System.out.println("=============== Prims Algorithm ================");
+
         PrimAlgor prim = new PrimAlgor();
         prim.MHPrimImplementation(graph);
     }

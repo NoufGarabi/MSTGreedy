@@ -29,7 +29,6 @@ class PrimAlgor extends MSTAlgor {
        // keep track of visted vertcies
        Set<Vertex> vistedVertcies = new HashSet<Vertex>();
        MinHeap minHeap = new MinHeap(edgesList.size()); // create a new min heap
-
        //insert first vertex in the min heap and give it a cost of 0
        Office firstVertex = adjList.get(0); // get first vertex from adj list
        minHeap.insert(new HeapNode(firstVertex ,0, graph.createEdge(firstVertex, firstVertex, 0)));
@@ -38,7 +37,6 @@ class PrimAlgor extends MSTAlgor {
         HeapNode poppedNode = minHeap.extractMin(); // extract min node from heap
         Office poppedVertex = poppedNode.getOffice(); // get vertex from node
         Line poppEdge = poppedNode.getLine();
-
         int cost = poppedNode.getKey(); // get key from node
 
         // if vertex is already visted skip it
@@ -70,7 +68,8 @@ class PrimAlgor extends MSTAlgor {
 
     @Override
     public void displayResultingMST() {
-        for (int i =0; i< MSTResultList.size(); i++){
+
+        for (int i = 1; i< MSTResultList.size(); i++){
             MSTResultList.get(i).displayInfo();
         }
     }

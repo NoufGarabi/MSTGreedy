@@ -41,10 +41,6 @@ public class App {
                 System.out.println("Thank you");
                 break;
         }
-
-
-        // Read graph from file
-        // Graph graph = Graph.readGraphFromFile("GraphFile.txt");
     }
 
     public static void graphGenerate(int vertexNo, int edgeNo) {
@@ -53,6 +49,7 @@ public class App {
         graph.makeGraph(graph);
         graph.printGraph();
 
+        // Apply kruksal and prim to class
         System.out.println("=========== Kruskal ================");
         KruskalAlg m = new KruskalAlg(vertexNo, edgeNo, graph);
         m.kruskalMST();

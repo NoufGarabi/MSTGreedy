@@ -132,18 +132,21 @@ public abstract class Graph {private final int verticesNum; // number of vertice
     /**
      * Prints the graph with line lengths as an adjacency list representation.
      */
-    public void printGraphh() {
-        System.out.println("\n== Adjacency List Representation ==");
-    
-        for (Office v : adjList) {
-            List<Office> neighbors = v.getAdjList();
-            for (Office neighbor : neighbors) {
-                int weight = getEdgeWeight(v, neighbor);
+// Method to print the graph in adjacency list representation
+public void printGraphh() {
+    System.out.println("\n== Adjacency List Representation ==");
+
+    for (Office v : adjList) {
+        List<Office> neighbors = v.getAdjList();
+        for (Office neighbor : neighbors) {
+            int weight = getEdgeWeight(v, neighbor);
+            if (weight != -1) { // Skip printing if there is no edge
                 System.out.println("Office No. " + v.getLabel() + " - Office No. " + neighbor.getLabel()
                         + ": Line length: " + weight * 5);
             }
         }
     }
+}
     
     /**
      * Reads a graph from a file with the given filename.

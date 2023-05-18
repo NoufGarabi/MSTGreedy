@@ -2,8 +2,8 @@ package com.graphframework;
 
 public class Edge {
 
-    private Office source; // The source vertex of the edge
-    private Office target; // The target vertex of the edge
+    private Vertex source; // The source vertex of the edge
+    private Vertex target; // The target vertex of the edge
     private int weight; // The weight of the edge
 
     // Main Constructor
@@ -16,26 +16,26 @@ public class Edge {
     }
 
     // Constructor with arguments
-    public Edge(Office source, Office target, int weight) {
+    public Edge(Vertex source, Vertex target, int weight) {
         this.source = source;
         this.target = target;
         this.weight = weight;
     }
 
     // Getter and Setter methods for source, target, and weight
-    public Office getSource() {
+    public Vertex getSource() {
         return source;
     }
 
-    public void setSource(Office source) {
+    public void setSource(Vertex source) {
         this.source = source;
     }
 
-    public Office getTarget() {
+    public Vertex getTarget() {
         return target;
     }
 
-    public void setTarget(Office target) {
+    public void setTarget(Vertex target) {
         this.target = target;
     }
 

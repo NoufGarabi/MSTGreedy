@@ -76,7 +76,7 @@ public class KruskalAlg extends MSTAlgor {
         i = 0;
         // finding the least cost edges and construct rhe minimum spanning tree
         while (e < V - 1) {
-            Edge next_edge = edges.get(i++);
+            Line next_edge = edges.get(i++);
 
             int x = find(parent, Integer.parseInt(next_edge.getSource().getLabel()));
             int y = find(parent, Integer.parseInt(next_edge.getTarget().getLabel()));

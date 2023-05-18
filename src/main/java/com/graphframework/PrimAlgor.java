@@ -8,7 +8,7 @@ import java.util.Set;
 import com.phonenetworkapp.Line;
 import com.phonenetworkapp.Office;
 
-class PrimAlgor extends MSTAlgor {
+public class PrimAlgor extends MSTAlgor {
     List<Edge> MSTResultList;
     
 

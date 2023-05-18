@@ -52,7 +52,10 @@ public class App {
         // Apply kruksal and prim to class
         System.out.println("=========== Kruskal ================");
         KruskalAlg m = new KruskalAlg(vertexNo, edgeNo, graph);
+
+        long krukStart = System.currentTimeMillis(); //track time in milli
         m.kruskalMST();
+        long krukEnd = System.currentTimeMillis(); 
         m.displayResultingMST();
 
         System.out.println();
@@ -60,7 +63,20 @@ public class App {
         System.out.println("=============== Prims Algorithm ================");
 
         PrimAlgor prim = new PrimAlgor();
+        long primStart = System.currentTimeMillis(); //track time in milli
         prim.MHPrimImplementation(graph);
+        long primEnd = System.currentTimeMillis(); 
         prim.displayResultingMST();
+
+        //Caluclate elapsed time in prim
+        long primTotalTime = primEnd - primStart;
+
+        //Caluclate elapsed time in kruksal
+        long krukTotalTime = krukEnd - krukStart;
+
+        System.out.println("======== Excution Time=========");
+        System.out.println("Prims excution time is: "+ primTotalTime + " ms");
+        System.out.println("Kruskal excution time is: "+ krukTotalTime +" ms");
     }
+
 }

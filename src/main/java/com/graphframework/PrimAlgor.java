@@ -6,12 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 class PrimAlgor extends MSTAlgor {
-    List<Edge> minSpaningTree;
+    List<Edge> MSTResultList;
     
 
     public PrimAlgor() {
         super();
-        minSpaningTree =  new ArrayList<>();
+        MSTResultList =  new ArrayList<>();
     }
 
     public void MHPrimImplementation(Graph graph) {
@@ -49,7 +49,7 @@ class PrimAlgor extends MSTAlgor {
         result += cost;
         vistedVertcies.add(poppedVertex); // add vertex to visited vertcies set
         poppedVertex.setVisited(true); // mark vertex to visited
-        minSpaningTree.add(poppEdge); // add min edge to MST
+        MSTResultList.add(poppEdge); // add min edge to MST
 
         for(Line e : edgesList) {
             Office source = e.getSource();
@@ -70,8 +70,8 @@ class PrimAlgor extends MSTAlgor {
 
     @Override
     public void displayResultingMST() {
-        for (Edge e : minSpaningTree){
-            e.displayInfo();
+        for (int i =0; i< MSTResultList.size(); i++){
+            MSTResultList.get(i).displayInfo();
         }
     }
 

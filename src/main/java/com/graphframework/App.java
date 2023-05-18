@@ -53,6 +53,7 @@ public class App {
         System.out.println("=========== Kruskal ================");
         KruskalAlg m = new KruskalAlg(vertexNo, edgeNo, graph);
         m.kruskalMST();
+        m.displayResultingMST();
 
         System.out.println();
 
@@ -60,5 +61,6 @@ public class App {
 
         PrimAlgor prim = new PrimAlgor();
         prim.MHPrimImplementation(graph);
+        prim.displayResultingMST();
     }
 }

@@ -11,7 +11,7 @@ import com.phonenetworkapp.Line;
 public class KruskalAlg extends MSTAlgor {
     public int V, E;
     public static List<Line> edges;
-    public static Edge[] result;
+    public static Edge[] MSTResultList;
     public static boolean isVisited;
     
     /**
@@ -66,13 +66,13 @@ public class KruskalAlg extends MSTAlgor {
     /**
      * Applies Kruskal's algorithm to find the minimum spanning tree of the graph.
      */
-    public void kruskalMST() {
-        result = new Line[V];
+    public Edge[] kruskalMST() {
+        MSTResultList = new Line[V];
         int e = 0;
         int i = 0;
     
         for (i = 0; i < V; ++i)
-            result[i] = new Line();
+        MSTResultList[i] = new Line();
     
         // Sort the edges in non-decreasing order of weight
         for (int z = 0; z < edges.size(); z++) {
@@ -105,12 +105,12 @@ public class KruskalAlg extends MSTAlgor {
             if (x != y) {
                 next_edge.getTarget().setVisited(true);
                 next_edge.getSource().setVisited(true);
-                result[e++] = next_edge;
+                MSTResultList[e++] = next_edge;
                 union(parent, rank, x, y);
             }
         }
     
-        displayResultingMST();
+        return MSTResultList;
     }
     
     @Override
@@ -122,8 +122,8 @@ public class KruskalAlg extends MSTAlgor {
         int minimumCost = 0;
     
         for (int i = 0; i < V - 1; i++) {
-            result[i].displayInfo();
-            minimumCost += result[i].getWeight();
+            MSTResultList[i].displayInfo();
+            minimumCost += MSTResultList[i].getWeight();
         }
     
         System.out.println("Minimum Cost Spanning Tree: " + minimumCost);

@@ -26,7 +26,7 @@ public PrimAlgor() {
 * 
 * @param graph The graph for which the minimum spanning tree needs to be found.
 */
-public void MHPrimImplementation(Graph graph) {
+public List<Edge> MHPrimImplementation(Graph graph) {
 
    // Get the number of vertices from the graph
    int numOfVertices = graph.getVerticesNum();
@@ -72,8 +72,7 @@ public void MHPrimImplementation(Graph graph) {
            }
        }
    }
-   System.out.println("Minimum cost is: " + result);
-   displayResultingMST();
+return MSTResultList;
 }
 
 /**

@@ -1,4 +1,6 @@
-package com.graphframework;
+package com.PhoneNetworkApp;
+
+import com.graphframework.Edge;
 
 public class Line extends Edge {
     private int lLength;

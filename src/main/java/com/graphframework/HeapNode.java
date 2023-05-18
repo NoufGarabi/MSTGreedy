@@ -1,5 +1,8 @@
 package com.graphframework;
 
+import com.PhoneNetworkApp.Line;
+import com.PhoneNetworkApp.Office;
+
 public class HeapNode {
         Office office;
         int key;

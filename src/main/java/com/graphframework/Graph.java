@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.PhoneNetworkApp.Line;
+import com.PhoneNetworkApp.Office;
+
 public abstract class Graph {
 
     private final int verticesNum; // number of vertices

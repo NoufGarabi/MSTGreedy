@@ -3,6 +3,8 @@ package com.graphframework;
 //import java.util.Arrays;
 import java.util.List;
 
+import com.PhoneNetworkApp.Line;
+
 public class KruskalAlg extends MSTAlgor {
 
     public int V, E;

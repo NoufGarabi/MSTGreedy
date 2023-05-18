@@ -1,4 +1,6 @@
-package com.graphframework;
+package com.PhoneNetworkApp;
+
+import com.graphframework.Vertex;
 
 public class Office extends Vertex {
     public Office(String label) {

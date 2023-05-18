@@ -2,6 +2,8 @@ package com.graphframework;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.PhoneNetworkApp.Office;
+
 /**
  *
  * The Vertex class represents a vertex in a graph. Each vertex has a label,

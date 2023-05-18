@@ -5,7 +5,7 @@ import java.util.List;
 
 public class KruskalAlg extends MSTAlgor {
     public int V, E;
-    public static List<Edge> edges;
+    public static List<Line> edges;
     public static Edge[] result;
 
     // Constructer
@@ -38,17 +38,17 @@ public class KruskalAlg extends MSTAlgor {
     }
 
     public void kruskalMST() {
-        result = new Edge[V];
+        result = new Line[V];
         int e = 0;
         int i = 0;
         for (i = 0; i < V; ++i)
-            result[i] = new Edge();
+            result[i] = new Line();
 
         // Sort the array
         for (int z = 0; z < edges.size(); z++) {
             for (int j = z + 1; j < edges.size(); j++) {
                 if (edges.get(z).getWeight() > edges.get(j).getWeight()) {
-                    Edge temp = edges.get(z);
+                    Line temp = edges.get(z);
                     edges.set(z, edges.get(j));
                     edges.set(j, temp);
                 }

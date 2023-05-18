@@ -19,10 +19,10 @@ class PrimAlgor extends MSTAlgor {
         // get the number of vertcies from graph
        int numOfVertcies = graph.getVerticesNum();
        // get the adjList from graph
-       List<Vertex> adjList = graph.getAdjList();
+       List<Office> adjList = graph.getAdjList();
 
        // get edges of graph
-       List<Edge> edgesList = graph.getEdges();
+       List<Line> edgesList = graph.getEdges();
 
        int result = 0; // track spanning tree cost
 

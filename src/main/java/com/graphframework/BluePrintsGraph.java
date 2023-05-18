@@ -7,12 +7,12 @@ public class BluePrintsGraph extends Graph{
     }
     
     @Override
-    protected Vertex createVertex(String label) {
+    protected Office createVertex(String label) {
         return new Office(label);
     }
 
     @Override
-    protected Edge createEdge(Vertex v, Vertex u, int weight) {
+    protected Line createEdge(Office v, Office u, int weight) {
         return new Line(v, u, weight);
     }
 }

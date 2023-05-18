@@ -12,7 +12,7 @@ public class Vertex {
 
     private String label; // the label of the vertex
     private boolean isVisited; // flag to indicate whether the vertex has been visited
-    private List<Vertex> adjList; // the adjacency list of the vertex
+    private List<Office> adjList; // the adjacency list of the vertex
 
 
     // Default constructor for Vertex class.
@@ -55,13 +55,13 @@ public class Vertex {
 
     
     // Returns the adjacency list of the vertex.
-    public List<Vertex> getAdjList() {
+    public List<Office> getAdjList() {
         return adjList;
     }
 
    
     // Adds a vertex to the adjacency list of the vertex.
-    public void addToAdjList(Vertex vertex) {
+    public void addToAdjList(Office vertex) {
         adjList.add(vertex);
     }
 

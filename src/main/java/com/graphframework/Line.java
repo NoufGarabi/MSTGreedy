@@ -3,8 +3,15 @@ package com.graphframework;
 public class Line extends Edge {
     private int lLength;
 
+
+    public Line() {
+       
+    }
+
+
+
     // Constructor
-    public Line(Vertex source, Vertex destination, int weight) {
+    public Line(Office source, Office destination, int weight) {
         super(source, destination, weight);
         this.lLength = weight * 5;
     }

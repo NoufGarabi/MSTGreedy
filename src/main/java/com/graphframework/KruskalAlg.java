@@ -83,16 +83,14 @@ public class KruskalAlg extends MSTAlgor {
     @Override
     // Method to print the result
     public void displayResultingMST() {
-        System.out.println("Following are the edges in the constructed MST (Kruskal Algorithm)");
         int minimumCost = 0;
 
         for (int i = 0; i < V - 1; i++) {
-            System.out.println(result[i].getSource().getLabel() + " -- " + result[i].getTarget().getLabel() + " == "
-                    + result[i].getWeight());
+            result[i].displayInfo();
             minimumCost += result[i].getWeight();
 
         }
-        System.out.println("Minimum Cost Spanning Tree: " + minimumCost);
+        System.out.println("The cost of designed phone network: " + minimumCost);
 
     }
     

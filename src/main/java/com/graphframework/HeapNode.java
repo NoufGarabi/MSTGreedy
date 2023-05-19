@@ -8,7 +8,7 @@ import com.phonenetworkapp.Line;
 import com.phonenetworkapp.Office;
 
 public class HeapNode {
-Office office; // The office associated with the node
+String office; // The office associated with the node
 int key; // The key value of the node
 Edge edge; // The edge associated with the node
 int index; // The index of the node
@@ -22,12 +22,12 @@ public HeapNode() {}
 /**
  * Constructor for the HeapNode class that sets the office, key, and edge.
  *
- * @param vertex The office associated with the node.
+ * @param target The office associated with the node.
  * @param key    The key value of the node.
  * @param edge   The edge associated with the node.
  */
-public HeapNode(Office vertex, int key, Line edge) {
-    this.office = vertex;
+public HeapNode(String target, int key, Line edge) {
+    this.office = target;
     this.key = key;
     this.line = edge;
 }
@@ -37,7 +37,7 @@ public HeapNode(Office vertex, int key, Line edge) {
  *
  * @return The office associated with the node.
  */
-public Office getOffice() {
+public String getOffice() {
     return office;
 }
 
@@ -46,7 +46,7 @@ public Office getOffice() {
  *
  * @param office The office to be associated with the node.
  */
-public void setOffice(Office office) {
+public void setOffice(String office) {
     this.office = office;
 }
 

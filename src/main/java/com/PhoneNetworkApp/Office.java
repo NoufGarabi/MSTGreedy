@@ -43,13 +43,6 @@ public void addToAdjList(Office vertex) {
 
     @Override
     public void displayInfo() {
-        System.out.println("Office information:");
-        System.out.println("Label: " + getLabel());
-        System.out.println("Visited: " + isVisited());
-        System.out.print("Adjacent list: ");
-        for (Vertex v : getAdjList()) {
-            System.out.print(v.getLabel() + " ");
-        }
-        System.out.println();
+        System.out.println("Office No." + (char)(Integer.parseInt(getLabel() + 65)) + " ");
     }
 }

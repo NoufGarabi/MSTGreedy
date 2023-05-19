@@ -41,16 +41,16 @@ public List<Edge> MHPrimImplementation(Graph graph) {
    List<Line> edgesList = graph.getEdges();
 
    // Keep track of visited vertices
-   Set<Vertex> visitedVertices = new HashSet<Vertex>();
+   Set<String> visitedVertices = new HashSet<String>();
    MinHeap minHeap = new MinHeap(numOfVertices * numOfVertices); // Create a new min heap
 
    // Insert the first vertex into the min heap and give it a cost of 0
    Office firstVertex = adjList.get(0); // Get the first vertex from the adjacency list
-   minHeap.insert(new HeapNode(firstVertex ,0, graph.createEdge(firstVertex, firstVertex, 0)));
+   minHeap.insert(new HeapNode(firstVertex.getLabel() ,0, graph.createEdge(firstVertex, firstVertex, 0)));
 
    while (visitedVertices.size() < numOfVertices && !minHeap.isEmpty()) {
        HeapNode poppedNode = minHeap.extractMin(); // Extract the minimum node from the heap
-       Office poppedVertex = poppedNode.getOffice(); // Get the vertex from the node
+       String poppedVertex = poppedNode.getOffice(); // Get the vertex from the node
        Line poppedEdge = poppedNode.getLine();
        int cost = poppedNode.getKey(); // Get the key from the node
 
@@ -61,42 +61,22 @@ public List<Edge> MHPrimImplementation(Graph graph) {
        // Add the cost to the result of the MST
        result += cost;
        visitedVertices.add(poppedVertex); // Add the vertex to the visited vertices set
-       poppedVertex.setVisited(true); // Mark the vertex as visited
        MSTResultList.add(poppedEdge); // Add the minimum edge to the MST
 
        
-    //    for (Line e : edgesList) {
-    //        Office source = e.getSource();
-    //        Office target = e.getTarget();
+       for (Line e : edgesList) {
+           String source = e.getSource().getLabel();
+           String target = e.getTarget().getLabel();
 
-    //        if (source.equals(poppedVertex) && !visitedVertices.contains(target)) {
-    //            minHeap.insert(new HeapNode(target, e.getWeight(), e));
+           if (source.equals(poppedVertex) && !visitedVertices.contains(target)) {
+               minHeap.insert(new HeapNode(target, e.getWeight(), e));
                
-    //        } else if (target.equals(poppedVertex) && !visitedVertices.contains(source)) {
-    //            minHeap.insert(new HeapNode(source, e.getWeight(), e));
+           } else if (target.equals(poppedVertex) && !visitedVertices.contains(source)) {
+               minHeap.insert(new HeapNode(source, e.getWeight(), e));
 
-    //        }
-           for (Office target : poppedVertex.getAdjList()) {
-            //[a] - [b],[c]
-            Line edge = graph.getEdge(poppedVertex, target);
-
-            if (!target.isVisited() && !visitedVertices.contains(target)) {
-                minHeap.insert(new HeapNode(target, edge.getWeight(), edge));
-
-            }
+           }
         
         }
-
-                //    for(int i=0; i< poppedVertex.getAdjList().size(); i++){
-        //     Office target = poppedVertex.getAdjList().get(i);
-        //     //[a] --> [b], [c]
-        //     int weight = graph.getEdgeWeight(poppedVertex,target);
-        //     Line edge = new Line(poppedVertex, target, weight);
-
-        //     //[a,b,]
-        //     if(!visitedVertices.contains(target) && weight!= -1)
-        //     minHeap.insert(new HeapNode(target, weight, edge));
-        //    }
     }
    
 return MSTResultList;
@@ -108,10 +88,9 @@ return MSTResultList;
 @Override
 public void displayResultingMST() {
 
-   System.out.println("Following are the edges in the constructed MST (Prim Algorithm)");
-   System.out.println("The minimmum spanning tree cost: " + result);
    for (int i = 1; i < MSTResultList.size(); i++) {
-       MSTResultList.get(i).displayInfo();
+    MSTResultList.get(i).displayInfo();
    }
+   System.out.println("The cost of designed phone network: " + result);
 }
 }

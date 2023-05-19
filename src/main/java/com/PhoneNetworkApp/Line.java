@@ -32,8 +32,9 @@ public class Line extends Edge {
     
     @Override
     public void displayInfo() {
-        super.displayInfo();
-        System.out.println("Line Length: " + lLength);
+        System.out.print("Office No." + (char)(Integer.parseInt(this.getSource().getLabel()) + 65));
+        System.out.print(" - Office No." + (char)(Integer.parseInt(this.getTarget().getLabel())+ 65) + " ");
+        System.out.println(": line length: " + this.lLength);
     }
 
 
@@ -60,5 +61,4 @@ public class Line extends Edge {
         this.target = target;
     }
 
-   
 }

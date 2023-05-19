@@ -2,8 +2,6 @@ package com.graphframework;
 
 import java.util.Arrays;
 
-import com.phonenetworkapp.Office;
-
 /**
  * MinHeap class represents a minimum heap.
  * It has a capacity, size, and an array of heap nodes.
@@ -26,7 +24,7 @@ class MinHeap {
 
         // this node is a placeholder only 
         heap[0] = new HeapNode();
-        heap[0].office = new Office("");
+        heap[0].office = "";
         heap[0].key = Integer.MIN_VALUE;
         heap[0].index = -1;
         decreaseKey = new int[capacity];

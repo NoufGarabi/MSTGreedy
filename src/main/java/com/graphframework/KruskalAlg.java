@@ -78,8 +78,6 @@ public class KruskalAlg extends MSTAlgor {
                 union(parent, rank, x, y);
             }
         }
-
-        displayResultingMST();
     }
 
     @Override

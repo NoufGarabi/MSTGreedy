@@ -53,7 +53,7 @@ public abstract class Graph {private final int verticesNum; // number of vertice
             u.addToAdjList(v);
         }
     
-        edges.add(e);
+        this.edges.add(e);
     
         if (digraph) {
             edgeNo++;
@@ -213,6 +213,7 @@ public void printGraphh() {
             // add edge to graph
             network.addEdge(v1, v2, w);
         }
+        scanner.close();
         return network;
     }
     
@@ -230,6 +231,22 @@ public void printGraphh() {
         }
         return null;
     }
+
+    public Line getEdge(Office src, Office trgt) {
+        for (Line edge : edges) {
+            if(this.digraph){
+            if (edge.getSource().equals(src) && edge.getTarget().equals(trgt)) {
+                return edge;}
+            }
+
+            if(!this.digraph){
+                if (edge.getSource().equals(src) && edge.getTarget().equals(trgt) || 
+                edge.getSource().equals(trgt) && edge.getTarget().equals(src)) {
+                    return edge;}
+                }
+        }
+        return null;
+    }
     
     /**
      * Gets the weight of the edge between the given vertices.
@@ -240,9 +257,14 @@ public void printGraphh() {
      */
     int getEdgeWeight(Office v, Office u) {
         for (Line e : edges) {
+            if(this.digraph){
             if (e.getSource().equals(v) && e.getTarget().equals(u)) {
                 return e.getWeight();
-            }
+            }}
+            if(!this.digraph){
+                if (e.getSource().equals(v) && e.getTarget().equals(u)|| e.getSource().equals(u) && e.getTarget().equals(v))  {
+                    return e.getWeight();
+                }}
         }
         return -1; // indicates that there is no edge between v and u
     }

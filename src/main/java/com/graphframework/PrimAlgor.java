@@ -48,7 +48,7 @@ public List<Edge> MHPrimImplementation(Graph graph) {
    Office firstVertex = adjList.get(0); // Get the first vertex from the adjacency list
    minHeap.insert(new HeapNode(firstVertex ,0, graph.createEdge(firstVertex, firstVertex, 0)));
 
-   while (visitedVertices.size() < numOfVertices) {
+   while (visitedVertices.size() < numOfVertices && !minHeap.isEmpty()) {
        HeapNode poppedNode = minHeap.extractMin(); // Extract the minimum node from the heap
        Office poppedVertex = poppedNode.getOffice(); // Get the vertex from the node
        Line poppedEdge = poppedNode.getLine();
@@ -65,19 +65,29 @@ public List<Edge> MHPrimImplementation(Graph graph) {
        MSTResultList.add(poppedEdge); // Add the minimum edge to the MST
 
        
-       for (Line e : edgesList) {
-           Office source = e.getSource();
-           Office target = e.getTarget();
+    //    for (Line e : edgesList) {
+    //        Office source = e.getSource();
+    //        Office target = e.getTarget();
 
-           if (source == poppedVertex && !visitedVertices.contains(target)) {
-               minHeap.insert(new HeapNode(target, e.getWeight(), e));
+    //        if (source.equals(poppedVertex) && !visitedVertices.contains(target)) {
+    //            minHeap.insert(new HeapNode(target, e.getWeight(), e));
                
-           } else if (target == poppedVertex && !visitedVertices.contains(source)) {
-               minHeap.insert(new HeapNode(source, e.getWeight(), e));
+    //        } else if (target.equals(poppedVertex) && !visitedVertices.contains(source)) {
+    //            minHeap.insert(new HeapNode(source, e.getWeight(), e));
 
-           }
+    //        }
+           for (Office target : poppedVertex.getAdjList()) {
+            //[a] - [b],[c]
+            Line edge = graph.getEdge(poppedVertex, target);
 
-        //    for(int i=0; i< poppedVertex.getAdjList().size(); i++){
+            if (!target.isVisited() && !visitedVertices.contains(target)) {
+                minHeap.insert(new HeapNode(target, edge.getWeight(), edge));
+
+            }
+        
+        }
+
+                //    for(int i=0; i< poppedVertex.getAdjList().size(); i++){
         //     Office target = poppedVertex.getAdjList().get(i);
         //     //[a] --> [b], [c]
         //     int weight = graph.getEdgeWeight(poppedVertex,target);
@@ -87,9 +97,6 @@ public List<Edge> MHPrimImplementation(Graph graph) {
         //     if(!visitedVertices.contains(target) && weight!= -1)
         //     minHeap.insert(new HeapNode(target, weight, edge));
         //    }
-       
-        
-        }
     }
    
 return MSTResultList;

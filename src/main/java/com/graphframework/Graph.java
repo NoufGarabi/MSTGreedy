@@ -133,6 +133,7 @@ public abstract class Graph {private final int verticesNum; // number of vertice
      * Prints the graph with line lengths as an adjacency list representation.
      */
 // Method to print the graph in adjacency list representation
+// Method to print the graph in adjacency list representation
 public void printGraphh() {
     System.out.println("\n== Adjacency List Representation ==");
 
@@ -141,8 +142,25 @@ public void printGraphh() {
         for (Office neighbor : neighbors) {
             int weight = getEdgeWeight(v, neighbor);
             if (weight != -1) { // Skip printing if there is no edge
-                System.out.println("Office No. " + v.getLabel() + " - Office No. " + neighbor.getLabel()
-                        + ": Line length: " + weight * 5);
+                String label = v.getLabel();
+                String nLabel = neighbor.getLabel();
+                int vIndex = 0;
+                int nIndex = 0;
+                char vChar;
+                char nChar;
+
+                try {
+                    vIndex = Integer.parseInt(label);
+                    nIndex = Integer.parseInt(nLabel);
+                    vChar = (char) ('A' + vIndex);
+                    nChar = (char) ('A' + nIndex);
+                } catch (NumberFormatException e) {
+                    vChar = label.charAt(0);
+                    nChar = nLabel.charAt(0);
+                }
+
+                System.out
+                        .println("Office No. " + vChar + " - Office No. " + nChar + ": Line length: " + weight * 5);
             }
         }
     }

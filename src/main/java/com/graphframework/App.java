@@ -2,6 +2,8 @@ package com.graphframework;
 import java.io.IOException;
 import java.util.Scanner;
 
+import com.phonenetworkapp.BluePrintsGraph;
+
 public class App {
     static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) throws IOException {

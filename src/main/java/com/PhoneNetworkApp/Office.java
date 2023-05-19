@@ -9,17 +9,13 @@ public class Office extends Vertex {
     private List<Office> adjList; // the adjacency list of the vertex
     
     public Office(String label) {
-        super(label);
-        setLabel(label); // Make sure that it's in correct format
+        super(label);; // Make sure that it's in correct format
         adjList = new ArrayList<>();
     }
 
     @Override
     public void setLabel(String label) {
-        // if (!label.matches("^O\\d+$")) {
-        //     throw new IllegalArgumentException("Office label must start with 'O' followed by a unique number");
-        // }
-        super.setLabel(label);
+        super.setLabel("O" + label);
     }
 
     /**

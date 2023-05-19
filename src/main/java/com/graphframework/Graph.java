@@ -176,41 +176,30 @@ public void printGraphh() {
     public static Graph readGraphFromFile(String filename) throws FileNotFoundException {
         File file = new File(filename);
         Scanner scanner = new Scanner(file);
-    
-        // Read the first line to determine if the graph is directed or undirected
+
         String digraphLine = scanner.nextLine();
         String[] digraphParts = digraphLine.split(" ");
         int digraphValue = Integer.parseInt(digraphParts[1]);
         boolean isDirected = (digraphValue == 1);
-    
-        // Read the second line to get the number of vertices and edges
-        int numVerts = scanner.nextInt();
-        int numEdges = scanner.nextInt();
-        scanner.nextLine();
-    
-        Graph graph = new BluePrintsGraph(numVerts, isDirected);
-    
-        // Create vertices
-        for (int i = 0; i < numVerts; i++) {
-            String label = Character.toString((char) ('A' + i));
-            graph.getAdjList().add(graph.createVertex(label));
+
+        int vertNum = scanner.nextInt();
+
+        Graph network = new  BluePrintsGraph(vertNum, isDirected);
+
+        int edgesNum = scanner.nextInt();
+
+        for (int i=0; i<edgesNum; i++){
+            char s1 = scanner.next().charAt(0);
+            char s2 = scanner.next().charAt(0);
+
+            Office v1 = new Office(s1 - 65 + "");
+            Office v2 = new Office(s2 - 65 + "");
+
+            int w = scanner.nextInt();
+
+            network.addEdge(v1, v2, w);
         }
-    
-        // Read the remaining lines to add edges to the graph
-        for (int i = 0; i < numEdges; i++) {
-            String[] line = scanner.nextLine().split(" ");
-            String srcLabel = line[0];
-            String destLabel = line[1];
-            int weight = Integer.parseInt(line[2]);
-    
-            Office srcVertex = graph.getVertex(srcLabel);
-            Office destVertex = graph.getVertex(destLabel);
-    
-            graph.addEdge(srcVertex, destVertex, weight);
-        }
-    
-        scanner.close();
-        return graph;
+        return network;
     }
     
     /**

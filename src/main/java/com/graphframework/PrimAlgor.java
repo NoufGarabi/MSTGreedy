@@ -43,12 +43,14 @@ public List<Edge> MHPrimImplementation(Graph graph) {
    // Keep track of visited vertices
    Set<Vertex> visitedVertices = new HashSet<Vertex>();
    MinHeap minHeap = new MinHeap(edgesList.size()); // Create a new min heap
+
    // Insert the first vertex into the min heap and give it a cost of 0
    Office firstVertex = adjList.get(0); // Get the first vertex from the adjacency list
    minHeap.insert(new HeapNode(firstVertex ,0, graph.createEdge(firstVertex, firstVertex, 0)));
 
    while (visitedVertices.size() < numOfVertices) {
        HeapNode poppedNode = minHeap.extractMin(); // Extract the minimum node from the heap
+       System.out.println(poppedNode.getOffice().getLabel());
        Office poppedVertex = poppedNode.getOffice(); // Get the vertex from the node
        Line poppedEdge = poppedNode.getLine();
        int cost = poppedNode.getKey(); // Get the key from the node
@@ -67,8 +69,11 @@ public List<Edge> MHPrimImplementation(Graph graph) {
            Office source = e.getSource();
            Office target = e.getTarget();
 
+           System.out.print("Source is :" + source.getLabel() + " ");
+           System.out.println("Source is :" + target.getLabel());
            if (source == poppedVertex && !visitedVertices.contains(target)) {
                minHeap.insert(new HeapNode(target, e.getWeight(), e));
+               
            } else if (target == poppedVertex && !visitedVertices.contains(source)) {
                minHeap.insert(new HeapNode(source, e.getWeight(), e));
            }

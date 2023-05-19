@@ -51,7 +51,7 @@ public class App {
 
         // Apply kruksal and prim to class
         System.out.println("=========== Kruskal ================");
-        KruskalAlg m = new KruskalAlg(vertexNo, edgeNo, graph);
+        KruskalAlg m = new KruskalAlg(graph);
 
         long krukStart = System.currentTimeMillis(); //track time in milli
         m.kruskalMST();
@@ -63,9 +63,11 @@ public class App {
         System.out.println("=============== Prims Algorithm ================");
 
         PrimAlgor prim = new PrimAlgor();
+
         long primStart = System.currentTimeMillis(); //track time in milli
         prim.MHPrimImplementation(graph);
         long primEnd = System.currentTimeMillis(); 
+
         prim.displayResultingMST();
 
         //Caluclate elapsed time in prim

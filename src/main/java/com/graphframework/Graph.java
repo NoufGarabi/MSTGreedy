@@ -177,26 +177,40 @@ public void printGraphh() {
         File file = new File(filename);
         Scanner scanner = new Scanner(file);
 
+        // Read if graph is digraph or not
         String digraphLine = scanner.nextLine();
         String[] digraphParts = digraphLine.split(" ");
         int digraphValue = Integer.parseInt(digraphParts[1]);
         boolean isDirected = (digraphValue == 1);
 
+        // get vertices number
         int vertNum = scanner.nextInt();
 
-        Graph network = new  BluePrintsGraph(vertNum, isDirected);
+        // create new graph
+        Graph network = new BluePrintsGraph(vertNum, isDirected);
 
+        // get edges number
         int edgesNum = scanner.nextInt();
 
-        for (int i=0; i<edgesNum; i++){
-            char s1 = scanner.next().charAt(0);
-            char s2 = scanner.next().charAt(0);
+        for (int i = 0; i < edgesNum; i++) {
+            char s1 = scanner.next().charAt(0); // get label of source office
+            char s2 = scanner.next().charAt(0);// get label of target office
 
+            // create new offices
             Office v1 = new Office(s1 - 65 + "");
             Office v2 = new Office(s2 - 65 + "");
 
+            // add office one to office 2 adj list
+            v1.addToAdjList(v2);
+    
+            if (!network.isDigraph()) {
+                v2.addToAdjList(v1);
+            }
+
+            // get weight of edge
             int w = scanner.nextInt();
 
+            // add edge to graph
             network.addEdge(v1, v2, w);
         }
         return network;
@@ -224,7 +238,7 @@ public void printGraphh() {
      * @param u The target vertex.
      * @return The weight of the edge between v and u, or -1 if there is no edge.
      */
-    private int getEdgeWeight(Office v, Office u) {
+    int getEdgeWeight(Office v, Office u) {
         for (Line e : edges) {
             if (e.getSource().equals(v) && e.getTarget().equals(u)) {
                 return e.getWeight();

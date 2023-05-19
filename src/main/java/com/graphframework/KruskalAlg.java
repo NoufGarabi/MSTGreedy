@@ -11,12 +11,14 @@ public class KruskalAlg extends MSTAlgor {
     public int V, E;
     public static List<Line> edges;
     public static Line[] result;
+   
 
     // Constructer
-    public KruskalAlg(int v, int e, Graph g) {
-        V = v;
-        E = e;
+    public KruskalAlg( Graph g) {
+        V = g.getVerticesNum();
+        E = g.getEdges().size();
         edges = g.getEdges();
+        
     }
 
     // To return the subset that contain i
@@ -64,7 +66,9 @@ public class KruskalAlg extends MSTAlgor {
         i = 0;
         // finding the least cost edges and construct rhe minimum spanning tree
         while (e < V - 1) {
+            
             Line next_edge = edges.get(i++);
+            
 
             int x = find(parent, Integer.parseInt(next_edge.getSource().getLabel()));
             int y = find(parent, Integer.parseInt(next_edge.getTarget().getLabel()));
@@ -96,9 +100,9 @@ public class KruskalAlg extends MSTAlgor {
     
     
     //Method to sort the List of edges 
-        public List<Line> SortedMethod(List<Line> employeeList) {
+        public List<Line> SortedMethod(List<Line> edge) {
 
-        Collections.sort(employeeList, new Comparator<Line>() {
+        Collections.sort(edge, new Comparator<Line>() {
 
             @Override
             public int compare(Line edge1, Line edge2) {
@@ -106,7 +110,8 @@ public class KruskalAlg extends MSTAlgor {
             }
 
         });
-        return employeeList;
+        return edge;
     }
+     
 
 }

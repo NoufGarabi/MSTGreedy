@@ -195,16 +195,22 @@ public void printGraphh() {
         for (int i = 0; i < edgesNum; i++) {
             char s1 = scanner.next().charAt(0); // get label of source office
             char s2 = scanner.next().charAt(0);// get label of target office
+            System.out.println("first char = " + s1 + "second char = " + s2);
 
             // create new offices
-            Office v1 = new Office(s1 - 65 + "");
-            Office v2 = new Office(s2 - 65 + "");
+            Office v1 = new Office(s1 - 65 + ""); // v1.label = 0
+            Office v2 = new Office(s2 - 65 + ""); // v2.label = 1
+
+            System.out.println("office 1 = " + v1 + "and its label is = " + v1);
+            System.out.println("office 2 = " + v2 + "and its label is = " + v2);
+        
 
             // add office one to office 2 adj list
-            v1.addToAdjList(v2);
+            v1.addToAdjList(v2); 
     
             if (!network.isDigraph()) {
                 v2.addToAdjList(v1);
+                System.out.println(v2.getAdjList());
             }
 
             // get weight of edge

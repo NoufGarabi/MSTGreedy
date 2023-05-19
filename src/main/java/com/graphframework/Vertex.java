@@ -84,7 +84,7 @@ public List<Office> getAdjList() {
  * @param vertex The vertex to add to the adjacency list.
  */
 public void addToAdjList(Office vertex) {
-    adjList.add(vertex);
+    this.adjList.add(vertex);
 }
 
 /**
@@ -93,7 +93,7 @@ public void addToAdjList(Office vertex) {
 public void displayInfo() {
     System.out.println("Vertex " + label + " is visited: " + isVisited);
     System.out.print("Adjacent list: ");
-    for (Vertex v : adjList) {
+    for (Office v : adjList) {
         System.out.print(v.getLabel() + " ");
     }
     System.out.println();

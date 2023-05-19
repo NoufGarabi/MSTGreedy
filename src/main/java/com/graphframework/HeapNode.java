@@ -5,7 +5,6 @@ It contains information about an office, a key value, an edge, an index, and a l
 **/
 package com.graphframework;
 import com.phonenetworkapp.Line;
-import com.phonenetworkapp.Office;
 
 public class HeapNode {
 String office; // The office associated with the node

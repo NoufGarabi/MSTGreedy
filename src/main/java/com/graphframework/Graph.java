@@ -7,12 +7,9 @@ package com.graphframework;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Set;
-
 import com.phonenetworkapp.Line;
 import com.phonenetworkapp.Office;
 
@@ -209,7 +206,7 @@ public void printGraphh() {
             // add edge to graph
             network.addEdge(v1, v2, w);
         }
-        
+
         scanner.close();
         return network;
     }

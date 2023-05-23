@@ -51,13 +51,13 @@ public class BluePrintsGraph extends Graph {
             int v1Index = s1 - 65; // Convert label to index
             Office v1 = (Office)network.getVertex(Integer.toString(v1Index));
             if (vertices[v1Index] == null) {
-                vertices[v1Index] = new Office(s1 - 65 + "");
+                vertices[v1Index] = (Office) network.createVertex(s1 - 65 + "");
             }
 
             int v2Index = s2 - 65; // Convert label to index
             Office v2 = (Office)network.getVertex(Integer.toString(v2Index));
             if (vertices[v2Index] == null) {
-                vertices[v2Index] = new Office(s2 - 65 + "");
+                vertices[v2Index] = (Office) network.createVertex(s2 - 65 + "");
             }
 
             // Get weight of edge

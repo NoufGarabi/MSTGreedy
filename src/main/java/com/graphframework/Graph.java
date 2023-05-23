@@ -165,20 +165,21 @@ public class Graph {
             int v1Index = s1 - 65; // Convert label to index
             Vertex v1 = graph.getVertex(Integer.toString(v1Index));
             if (vertices[v1Index] == null) {
-                vertices[v1Index] = new Vertex(s1 - 65 + "");
+                vertices[v1Index] = graph.createVertex(s1 - 65 + "");
             }
 
             int v2Index = s2 - 65; // Convert label to index
             Vertex v2 = graph.getVertex(Integer.toString(v2Index));
             if (vertices[v2Index] == null) {
-                vertices[v2Index] = new Vertex(s2 - 65 + "");
+                vertices[v2Index] = graph.createVertex(s2 - 65 + "");
             }
 
             // Get weight of edge
             int w = scanner.nextInt();
 
             // Add edge to graph
-            graph.addEdge(v1, v2, w);
+            Edge e = graph.createEdge(v1, v2, w);
+            graph.addEdge(e.getSource(), e.getTarget(), e.getWeight());
         }
 
         scanner.close();

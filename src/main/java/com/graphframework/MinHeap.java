@@ -24,7 +24,7 @@ class MinHeap {
 
         // this node is a placeholder only 
         heap[0] = new HeapNode();
-        heap[0].vertex = "";
+        heap[0].vertex = new Vertex("");
         heap[0].key = Integer.MIN_VALUE;
         heap[0].index = -1;
         decreaseKey = new int[capacity];

@@ -39,16 +39,16 @@ public List<Edge> MHPrimImplementation(Graph graph) {
    List<Edge> edgesList = graph.getEdges();
 
    // Keep track of visited vertices
-   Set<String> visitedVertices = new HashSet<String>();
+   Set<Vertex> visitedVertices = new HashSet<Vertex>();
    MinHeap minHeap = new MinHeap(numOfVertices * numOfVertices); // Create a new min heap
 
    // Insert the first vertex into the min heap and give it a cost of 0
    Vertex firstVertex = adjList.get(0); // Get the first vertex from the adjacency list
-   minHeap.insert(new HeapNode(firstVertex.getLabel() ,0, graph.createEdge(firstVertex, firstVertex, 0)));
+   minHeap.insert(new HeapNode(firstVertex ,0, graph.createEdge(firstVertex, firstVertex, 0)));
 
    while (visitedVertices.size() < numOfVertices && !minHeap.isEmpty()) {
        HeapNode poppedNode = minHeap.extractMin(); // Extract the minimum node from the heap
-       String poppedVertex = poppedNode.getVertex(); // Get the vertex from the node
+       Vertex poppedVertex = poppedNode.getVertex(); // Get the vertex from the node
        Edge poppedEdge = poppedNode.getEdge();
        int cost = poppedNode.getKey(); // Get the key from the node
 
@@ -63,8 +63,8 @@ public List<Edge> MHPrimImplementation(Graph graph) {
 
        
        for (Edge e : edgesList) {
-           String source = e.getSource().getLabel();
-           String target = e.getTarget().getLabel();
+        Vertex source = e.getSource();
+        Vertex target = e.getTarget();
 
            if (source.equals(poppedVertex) && !visitedVertices.contains(target)) {
                minHeap.insert(new HeapNode(target, e.getWeight(), e));

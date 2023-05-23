@@ -6,7 +6,7 @@ It contains information about an office, a key value, an edge, an index, and a l
 package com.graphframework;
 
 public class HeapNode {
-String vertex; // The office associated with the node
+Vertex vertex; // The office associated with the node
 int key; // The key value of the node
 Edge edge; // The edge associated with the node
 public Edge getEdge() {
@@ -31,7 +31,7 @@ public HeapNode() {}
  * @param key    The key value of the node.
  * @param e   The edge associated with the node.
  */
-public HeapNode(String target, int key, Edge e) {
+public HeapNode(Vertex target, int key, Edge e) {
     this.vertex = target;
     this.key = key;
     this.edge = e;
@@ -42,7 +42,7 @@ public HeapNode(String target, int key, Edge e) {
  *
  * @return The office associated with the node.
  */
-public String getVertex() {
+public Vertex getVertex() {
     return this.vertex;
 }
 
@@ -51,7 +51,7 @@ public String getVertex() {
  *
  * @param office The office to be associated with the node.
  */
-public void setVertex(String vertex) {
+public void setVertex(Vertex vertex) {
     this.vertex = vertex;
 }
 

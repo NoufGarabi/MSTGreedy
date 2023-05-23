@@ -58,9 +58,6 @@ public class Vertex {
     // Adds a vertex to the adjacency list of the vertex.
     public void addToAdjList(Edge vertex2) {
         adjList.add(vertex2);
-        for (int i = 0; i < adjList.size(); i++) {
-            System.out.println(adjList.getClass().getName());
-        }
 
     }
 
@@ -75,13 +72,5 @@ public class Vertex {
             System.out.print(e.getSource().getLabel() + " " + e.getTarget().getLabel() + "W: " + e.getWeight());
         }
         System.out.println();
-    }
-
-    public Vertex getSource() {
-        return null;
-    }
-
-    public Vertex getTarget() {
-        return null;
     }
 }

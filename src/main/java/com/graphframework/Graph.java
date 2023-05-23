@@ -91,13 +91,15 @@ public class Graph {
     public void printGraph() {
         System.out.println("\n== Adjacency List Representation ==");
         for (Vertex v : adjList) {
-            System.out.print("Office No. " + v.getLabel() + ": ");
+            System.out.println("Adjacency List of Vertex No. " + v.getLabel());
             List<Edge> neighbors = v.getAdjList();
             for (Edge neighbor : neighbors) {
-                System.out.print(neighbor.getSource().getLabel() + "W: " + neighbor.getTarget().getLabel() + "W: "
+                System.out.println("Source: " + neighbor.getSource().getLabel() + "\nTarget: " + neighbor.getTarget().getLabel() + "\nWeight: " + neighbor.getWeight()
                         + neighbor.getWeight());
+                        System.out.println();
             }
             System.out.println();
+            System.out.println("=============");
         }
     }
 

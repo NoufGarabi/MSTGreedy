@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.phonenetworkapp.Office;
-
 public class Graph {
     private final int verticesNum; // number of vertices
     private final boolean digraph; // is the graph directed?
@@ -167,13 +165,13 @@ public class Graph {
             int v1Index = s1 - 65; // Convert label to index
             Vertex v1 = network.getVertex(Integer.toString(v1Index));
             if (vertices[v1Index] == null) {
-                vertices[v1Index] = new Office(s1 - 65 + "");
+                vertices[v1Index] = new Vertex(s1 - 65 + "");
             }
 
             int v2Index = s2 - 65; // Convert label to index
             Vertex v2 = network.getVertex(Integer.toString(v2Index));
             if (vertices[v2Index] == null) {
-                vertices[v2Index] = new Office(s2 - 65 + "");
+                vertices[v2Index] = new Vertex(s2 - 65 + "");
             }
 
             // Get weight of edge

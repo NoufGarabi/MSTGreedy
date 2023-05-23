@@ -5,12 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.phonenetworkapp.Line;
-
 public class KruskalAlg extends MSTAlgor {
     public int V, E;
-    public static List<Line> edges;
-    public static Line[] result;
+    public static List<Edge> edges;
+    public static Edge[] result;
    
 
     // Constructer
@@ -44,7 +42,7 @@ public class KruskalAlg extends MSTAlgor {
     }
 
     public void kruskalMST() {
-        result = new Line[V];
+        result = new Edge[V];
         int e = 0;
         int i = 0;
 
@@ -67,7 +65,7 @@ public class KruskalAlg extends MSTAlgor {
         // finding the least cost edges and construct rhe minimum spanning tree
         while (e < V - 1) {
             
-            Line next_edge = edges.get(i++);
+            Edge next_edge = edges.get(i++);
             
 
             int x = find(parent, Integer.parseInt(next_edge.getSource().getLabel()));
@@ -96,12 +94,12 @@ public class KruskalAlg extends MSTAlgor {
     
     
     //Method to sort the List of edges 
-        public List<Line> SortedMethod(List<Line> edge) {
+        public List<Edge> SortedMethod(List<Edge> edge) {
 
-        Collections.sort(edge, new Comparator<Line>() {
+        Collections.sort(edge, new Comparator<Edge>() {
 
             @Override
-            public int compare(Line edge1, Line edge2) {
+            public int compare(Edge edge1, Edge edge2) {
                 return edge1.getWeight()- edge2.getWeight();
             }
 

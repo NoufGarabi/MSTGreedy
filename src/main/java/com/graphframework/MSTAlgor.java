@@ -5,10 +5,9 @@
  */
 package com.graphframework;
 
-import com.phonenetworkapp.Line;
 
 public abstract class MSTAlgor {
-    private Line[] MSTResultList; // Stores the resulting MST edges
+    private Edge[] MSTResultList; // Stores the resulting MST edges
 
     /**
      * Abstract method to display the resulting minimum spanning tree.

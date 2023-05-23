@@ -1,9 +1,6 @@
-/**
-
-Graph is an abstract class representing a graph data structure.
-It provides methods to create and manipulate a graph.
-*/
+// adjList As Edge
 package com.graphframework;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -11,170 +8,135 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.phonenetworkapp.BluePrintsGraph;
-import com.phonenetworkapp.Line;
 import com.phonenetworkapp.Office;
 
-public abstract class Graph {private final int verticesNum; // number of vertices
+public class Graph {
+    private final int verticesNum; // number of vertices
     private final boolean digraph; // is the graph directed?
-    private final List<Line> edges; // list of edges in the graph
-    private final List<Office> adjList; // adjacency list for each vertex
+    private final List<Edge> edges; // list of edges in the graph
+    protected final List<Vertex> adjList; // adjacency list for each vertex
     private int edgeNo = 0; // number of edges in the graph
-    
-    /**
-     * Constructs a new graph with the given number of vertices and directed/undirected property.
-     *
-     * @param numVerts   The number of vertices in the graph.
-     * @param isDirected Indicates whether the graph is directed (true) or undirected (false).
-     */
+
+    // Constructs a new graph with the given number of vertices and
     public Graph(int numVerts, boolean isDirected) {
         this.verticesNum = numVerts;
         this.digraph = isDirected;
         this.edges = new ArrayList<>();
         this.adjList = new ArrayList<>();
-    
+
         // Create a vertex for each number in the range [0, numVerts)
         for (int i = 0; i < verticesNum; i++) {
             adjList.add(createVertex(Integer.toString(i)));
         }
     }
-    
-    /**
-     * Adds an edge to the graph between the given vertices with the given weight.
-     *
-     * @param v The source vertex.
-     * @param u The target vertex.
-     * @param w The weight of the edge.
-     */
-    public void addEdge(Office v, Office u, int w) {
-        Line e = createEdge(v, u, w);
-        v.addToAdjList(u);
-    
-        // If the graph is undirected, add a reverse edge as well
-        if (!digraph) {
-            u.addToAdjList(v);
-        }
-    
+
+    // Adds an edge to the graph between the given vertices with the given weight.
+    public void addEdge(Vertex vertex, Vertex vertex2, int w) {
+        Edge e = createEdge(vertex, vertex2, w);
+        vertex.addToAdjList(e);
+        vertex2.addToAdjList(e); // add the edge to the adjacency list of vertex2
+
         this.edges.add(e);
-    
-        if (digraph) {
-            edgeNo++;
-        } else {
+
+        if (!digraph) {
             edgeNo += 2;
+        } else {
+            edgeNo++;
         }
     }
-    
-    /**
-     * Abstract method to create a vertex.
-     *
-     * @param label The label of the vertex.
-     * @return The created vertex object.
-     */
-    protected abstract Office createVertex(String label);
-    
-    /**
-     * Abstract method to create an edge.
-     *
-     * @param v      The source vertex.
-     * @param u      The target vertex.
-     * @param weight The weight of the edge.
-     * @return The created edge object.
-     */
-    protected abstract Line createEdge(Office v, Office u, int weight);
-    
-    /**
-     * Generates a random graph with the given number of edges.
-     *
-     * @param g The blueprint of the graph.
-     */
-    public void makeGraph(BluePrintsGraph g) {
+
+    // Method to create a vertex.
+    public Vertex createVertex(String label) {
+        return new Vertex(label);
+
+    }
+
+    // Method to create an edge.
+    public Edge createEdge(Vertex vertex, Vertex vertex2, int weight) {
+        return new Edge(vertex, vertex2, weight);
+
+    }
+
+    // Generates a random graph with the given number of edges.
+    public void makeGraph(Graph g) {
         Random randm = new Random();
-    
+
         // Create a path of vertices with random weights
         for (int i = 0; i < verticesNum - 1; i++) {
             int weight = randm.nextInt(40) + 1;
             addEdge(adjList.get(i), adjList.get(i + 1), weight);
             if (!digraph) {
-                addEdge(adjList.get(i + 1), adjList.get(i), weight); // if the graph is undirected, add a reverse edge as well
+                addEdge(adjList.get(i + 1), adjList.get(i), weight); // if the graph is undirected, add a reverse edge
+                                                                     // as well
             }
         }
-    
+
         // Create additional edges until the desired number is reached
         int remEdges = edgeNo - (verticesNum - 1);
         for (int i = 0; i < remEdges; i++) {
             int srcVert = randm.nextInt(verticesNum);
             int destVert = randm.nextInt(verticesNum);
-    
-            // If the source and destination vertices are the same or already connected, try again
+
+            // If the source and destination vertices are the same or already connected, try
+            // again
             if (destVert == srcVert || isConnected(srcVert, destVert, adjList)) {
                 i--;
                 continue;
             }
-    
+
             int weight = randm.nextInt(40) + 1;
             addEdge(adjList.get(srcVert), adjList.get(destVert), weight);
         }
     }
-    
-    /**
-     * Prints the graph as an adjacency list representation.
-     */
+
+    // Prints the graph as an adjacency list representation.
     public void printGraph() {
         System.out.println("\n== Adjacency List Representation ==");
-        for (Office v : adjList) {
+        for (Vertex v : adjList) {
             System.out.print("Office No. " + v.getLabel() + ": ");
-            List<Office> neighbors = v.getAdjList();
-            for (Office neighbor : neighbors) {
-                System.out.print(neighbor.getLabel() + " ");
+            List<Edge> neighbors = v.getAdjList();
+            for (Edge neighbor : neighbors) {
+                System.out.print(neighbor.getSource().getLabel() + "W: " + neighbor.getTarget().getLabel() + "W: "
+                        + neighbor.getWeight());
             }
             System.out.println();
         }
     }
-    
-    /**
-     * Prints the graph with line lengths as an adjacency list representation.
-     */
-// Method to print the graph in adjacency list representation
-// Method to print the graph in adjacency list representation
-public void printGraphh() {
-    System.out.println("\n== Adjacency List Representation ==");
 
-    for (Office v : adjList) {
-        List<Office> neighbors = v.getAdjList();
-        for (Office neighbor : neighbors) {
-            int weight = getEdgeWeight(v, neighbor);
-            if (weight != -1) { // Skip printing if there is no edge
-                String label = v.getLabel();
-                String nLabel = neighbor.getLabel();
-                int vIndex = 0;
-                int nIndex = 0;
-                char vChar;
-                char nChar;
+    // public void printGraphh() {
+    // System.out.println("\n== Adjacency List Representation ==");
 
-                try {
-                    vIndex = Integer.parseInt(label);
-                    nIndex = Integer.parseInt(nLabel);
-                    vChar = (char) ('A' + vIndex);
-                    nChar = (char) ('A' + nIndex);
-                } catch (NumberFormatException e) {
-                    vChar = label.charAt(0);
-                    nChar = nLabel.charAt(0);
-                }
+    // for (Vertex v : adjList) {
+    // List<Edge> neighbors = v.getAdjList();
+    // for (Edge neighbor : neighbors) {
+    // int weight = getEdgeWeight(v, neighbor);
+    // if (weight != -1) { // Skip printing if there is no edge
+    // String label = v.getLabel();
+    // String nLabel = neighbor.getLabel();
+    // int vIndex = 0;
+    // int nIndex = 0;
+    // char vChar;
+    // char nChar;
 
-                System.out
-                        .println("Office No. " + vChar + " - Office No. " + nChar + ": Line length: " + weight * 5);
-            }
-        }
-    }
-}
-    
-    /**
-     * Reads a graph from a file with the given filename.
-     *
-     * @param filename The name of the file containing the graph.
-     * @return The constructed graph object.
-     * @throws FileNotFoundException If the file is not found.
-     */
+    // try {
+    // vIndex = Integer.parseInt(label);
+    // nIndex = Integer.parseInt(nLabel);
+    // vChar = (char) ('A' + vIndex);
+    // nChar = (char) ('A' + nIndex);
+    // } catch (NumberFormatException e) {
+    // vChar = label.charAt(0);
+    // nChar = nLabel.charAt(0);
+    // }
+
+    // System.out
+    // .println("Office No. " + vChar + " - Office No. " + nChar + ": Line length: "
+    // + weight * 5);
+    // }
+    // }
+    // }
+    // }
+
+    // Reads a graph from a file with the given filename.
     public static Graph readGraphFromFile(String filename) throws FileNotFoundException {
         File file = new File(filename);
         Scanner scanner = new Scanner(file);
@@ -185,42 +147,49 @@ public void printGraphh() {
         int digraphValue = Integer.parseInt(digraphParts[1]);
         boolean isDirected = (digraphValue == 1);
 
-        // get vertices number
+        // Get vertices number
         int vertNum = scanner.nextInt();
 
-        // create new graph
-        Graph network = new BluePrintsGraph(vertNum, isDirected);
+        // Create new graph
+        Graph network = new Graph(vertNum, isDirected);
 
-        // get edges number
+        // Get edges number
         int edgesNum = scanner.nextInt();
 
-        for (int i = 0; i < edgesNum; i++) {
-            char s1 = scanner.next().charAt(0); // get label of source office
-            char s2 = scanner.next().charAt(0);// get label of target office
+        // Create an array to store the vertices
+        Vertex[] vertices = new Vertex[vertNum];
 
-            // create new offices
-            
-            Office v1 = new Office(s1 - 65 + "");
-            Office v2 = new Office(s2 - 65 + "");
-            // get weight of edge
+        for (int i = 0; i < edgesNum; i++) {
+            char s1 = scanner.next().charAt(0); // Get label of source office
+            char s2 = scanner.next().charAt(0); // Get label of target office
+
+            // Create new offices if they don't exist in the array
+            int v1Index = s1 - 65; // Convert label to index
+            Vertex v1 = network.getVertex(Integer.toString(v1Index));
+            if (vertices[v1Index] == null) {
+                vertices[v1Index] = new Office(s1 - 65 + "");
+            }
+
+            int v2Index = s2 - 65; // Convert label to index
+            Vertex v2 = network.getVertex(Integer.toString(v2Index));
+            if (vertices[v2Index] == null) {
+                vertices[v2Index] = new Office(s2 - 65 + "");
+            }
+
+            // Get weight of edge
             int w = scanner.nextInt();
 
-            // add edge to graph
+            // Add edge to graph
             network.addEdge(v1, v2, w);
         }
 
         scanner.close();
         return network;
     }
-    
-    /**
-     * Gets the vertex with the given label.
-     *
-     * @param label The label of the vertex to retrieve.
-     * @return The vertex object with the given label, or null if not found.
-     */
-    public Office getVertex(String label) {
-        for (Office vertex : adjList) {
+
+    // Gets the vertex with the given label.
+    public Vertex getVertex(String label) {
+        for (Vertex vertex : adjList) {
             if (vertex.getLabel().equals(label)) {
                 return vertex;
             }
@@ -228,95 +197,70 @@ public void printGraphh() {
         return null;
     }
 
-    public Line getEdge(Office src, Office trgt) {
-        for (Line edge : edges) {
-            if(this.digraph){
-            if (edge.getSource().equals(src) && edge.getTarget().equals(trgt)) {
-                return edge;}
+    public Edge getEdge(Vertex src, Vertex trgt) {
+        for (Edge edge : edges) {
+            if (this.digraph) {
+                if (edge.getSource().equals(src) && edge.getTarget().equals(trgt)) {
+                    return edge;
+                }
             }
 
-            if(!this.digraph){
-                if (edge.getSource().equals(src) && edge.getTarget().equals(trgt) || 
-                edge.getSource().equals(trgt) && edge.getTarget().equals(src)) {
-                    return edge;}
+            if (!this.digraph) {
+                if (edge.getSource().equals(src) && edge.getTarget().equals(trgt) ||
+                        edge.getSource().equals(trgt) && edge.getTarget().equals(src)) {
+                    return edge;
                 }
+            }
         }
         return null;
     }
-    
-    /**
-     * Gets the weight of the edge between the given vertices.
-     *
-     * @param v The source vertex.
-     * @param u The target vertex.
-     * @return The weight of the edge between v and u, or -1 if there is no edge.
-     */
-    int getEdgeWeight(Office v, Office u) {
-        for (Line e : edges) {
-            if(this.digraph){
-            if (e.getSource().equals(v) && e.getTarget().equals(u)) {
-                return e.getWeight();
-            }}
-            if(!this.digraph){
-                if (e.getSource().equals(v) && e.getTarget().equals(u)|| e.getSource().equals(u) && e.getTarget().equals(v))  {
+
+    // Gets the weight of the edge between the given vertices.
+    int getEdgeWeight(Vertex v, Vertex u) {
+        for (Edge e : edges) {
+            if (this.digraph) {
+                if (e.getSource().equals(v) && e.getTarget().equals(u)) {
                     return e.getWeight();
-                }}
+                }
+            }
+            if (!this.digraph) {
+                if (e.getSource().equals(v) && e.getTarget().equals(u)
+                        || e.getSource().equals(u) && e.getTarget().equals(v)) {
+                    return e.getWeight();
+                }
+            }
         }
         return -1; // indicates that there is no edge between v and u
     }
-    
-    /**
-     * Checks if there is an edge between the given vertices.
-     *
-     * @param src  The source vertex index.
-     * @param dest The target vertex index.
-     * @param list The adjacency list of vertices.
-     * @return true if there is an edge between the vertices, false otherwise.
-     */
-    private boolean isConnected(int src, int dest, List<Office> list) {
-        for (Office vertex : list.get(src).getAdjList()) {
-            if (vertex.getLabel().equals(Integer.toString(dest))) {
+
+    // Checks if there is an edge between the given vertices.
+    private boolean isConnected(int src, int dest, List<Vertex> adjList2) {
+        for (Edge vertex : adjList2.get(src).getAdjList()) {
+            if (vertex.getSource().getLabel().equals(Integer.toString(dest))) {
                 return true;
             }
         }
         return false;
     }
-    
-    /**
-     * Checks if the graph is directed.
-     *
-     * @return true if the graph is directed, false if it is undirected.
-     */
+
+    // Checks if the graph is directed.
     public boolean isDigraph() {
         return digraph;
     }
-    
-    /**
-     * Gets the number of vertices in the graph.
-     *
-     * @return The number of vertices.
-     */
+
+    // Gets the number of vertices in the graph.
     public int getVerticesNum() {
         return verticesNum;
     }
-    
-    /**
-     * Gets the list of edges in the graph.
-     *
-     * @return The list of edges.
-     */
-    public List<Line> getEdges() {
+
+    // Gets the list of edges in the graph.
+    public List<Edge> getEdges() {
         return edges;
     }
-    
-    /**
-     * Gets the adjacency list of vertices in the graph.
-     *
-     * @return The adjacency list.
-     */
-    public List<Office> getAdjList() {
+
+    // Gets the adjacency list of vertices in the graph.
+    public List<Vertex> getAdjList() {
         return adjList;
     }
-    
 
 }

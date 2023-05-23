@@ -4,14 +4,20 @@ The HeapNode class represents a node in a heap data structure.
 It contains information about an office, a key value, an edge, an index, and a line.
 **/
 package com.graphframework;
-import com.phonenetworkapp.Line;
 
 public class HeapNode {
-String office; // The office associated with the node
+String vertex; // The office associated with the node
 int key; // The key value of the node
 Edge edge; // The edge associated with the node
+public Edge getEdge() {
+    return edge;
+}
+
+public void setEdge(Edge edge) {
+    this.edge = edge;
+}
+
 int index; // The index of the node
-Line line; // The line associated with the node
 
 /**
  * Default constructor for the HeapNode class.
@@ -23,12 +29,12 @@ public HeapNode() {}
  *
  * @param target The office associated with the node.
  * @param key    The key value of the node.
- * @param edge   The edge associated with the node.
+ * @param e   The edge associated with the node.
  */
-public HeapNode(String target, int key, Line edge) {
-    this.office = target;
+public HeapNode(String target, int key, Edge e) {
+    this.vertex = target;
     this.key = key;
-    this.line = edge;
+    this.edge = e;
 }
 
 /**
@@ -36,8 +42,8 @@ public HeapNode(String target, int key, Line edge) {
  *
  * @return The office associated with the node.
  */
-public String getOffice() {
-    return office;
+public String getVertex() {
+    return this.vertex;
 }
 
 /**
@@ -45,8 +51,8 @@ public String getOffice() {
  *
  * @param office The office to be associated with the node.
  */
-public void setOffice(String office) {
-    this.office = office;
+public void setVertex(String vertex) {
+    this.vertex = vertex;
 }
 
 /**
@@ -90,16 +96,4 @@ public void setIndex(int id) {
  *
  * @return The line associated with the node.
  */
-public Line getLine() {
-    return line;
-}
-
-/**
- * Sets the line associated with the node.
- *
- * @param line The line to be associated with the node.
- */
-public void setLine(Line line) {
-    this.line = line;
-}
 }

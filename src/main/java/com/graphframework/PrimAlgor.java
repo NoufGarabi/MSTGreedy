@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.phonenetworkapp.Line;
-import com.phonenetworkapp.Office;
 
 public class PrimAlgor extends MSTAlgor {
 List<Edge> MSTResultList;
@@ -35,23 +33,23 @@ public List<Edge> MHPrimImplementation(Graph graph) {
    // Get the number of vertices from the graph
    int numOfVertices = graph.getVerticesNum();
    // Get the adjacency list from the graph
-   List<Office> adjList = graph.getAdjList();
+   List<Vertex> adjList = graph.getAdjList();
 
    // Get the edges of the graph
-   List<Line> edgesList = graph.getEdges();
+   List<Edge> edgesList = graph.getEdges();
 
    // Keep track of visited vertices
    Set<String> visitedVertices = new HashSet<String>();
    MinHeap minHeap = new MinHeap(numOfVertices * numOfVertices); // Create a new min heap
 
    // Insert the first vertex into the min heap and give it a cost of 0
-   Office firstVertex = adjList.get(0); // Get the first vertex from the adjacency list
+   Vertex firstVertex = adjList.get(0); // Get the first vertex from the adjacency list
    minHeap.insert(new HeapNode(firstVertex.getLabel() ,0, graph.createEdge(firstVertex, firstVertex, 0)));
 
    while (visitedVertices.size() < numOfVertices && !minHeap.isEmpty()) {
        HeapNode poppedNode = minHeap.extractMin(); // Extract the minimum node from the heap
-       String poppedVertex = poppedNode.getOffice(); // Get the vertex from the node
-       Line poppedEdge = poppedNode.getLine();
+       String poppedVertex = poppedNode.getVertex(); // Get the vertex from the node
+       Edge poppedEdge = poppedNode.getEdge();
        int cost = poppedNode.getKey(); // Get the key from the node
 
        // If the vertex is already visited, skip it
@@ -64,7 +62,7 @@ public List<Edge> MHPrimImplementation(Graph graph) {
        MSTResultList.add(poppedEdge); // Add the minimum edge to the MST
 
        
-       for (Line e : edgesList) {
+       for (Edge e : edgesList) {
            String source = e.getSource().getLabel();
            String target = e.getTarget().getLabel();
 

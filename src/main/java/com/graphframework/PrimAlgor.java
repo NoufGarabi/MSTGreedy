@@ -11,7 +11,6 @@ import java.util.Set;
 
 public class PrimAlgor extends MSTAlgor {
 List<Edge> MSTResultList;
-int result;
 /**
 
 * Constructs a new PrimAlgor object.
@@ -20,7 +19,6 @@ int result;
 public PrimAlgor() {
    super();
    MSTResultList =  new ArrayList<>();
-    result = 0;
 }
 
 /**
@@ -35,8 +33,6 @@ public List<Edge> MHPrimImplementation(Graph graph) {
    // Get the adjacency list from the graph
    List<Vertex> adjList = graph.getAdjList();
 
-   // Get the edges of the graph
-   List<Edge> edgesList = graph.getEdges();
 
    // Keep track of visited vertices
    Set<Vertex> visitedVertices = new HashSet<Vertex>();
@@ -50,19 +46,17 @@ public List<Edge> MHPrimImplementation(Graph graph) {
        HeapNode poppedNode = minHeap.extractMin(); // Extract the minimum node from the heap
        Vertex poppedVertex = poppedNode.getVertex(); // Get the vertex from the node
        Edge poppedEdge = poppedNode.getEdge();
-       int cost = poppedNode.getKey(); // Get the key from the node
+    //    int cost = poppedNode.getKey(); // Get the key from the node
 
        // If the vertex is already visited, skip it
        if (visitedVertices.contains(poppedVertex))
            continue;
 
-       // Add the cost to the result of the MST
-       result += cost;
        visitedVertices.add(poppedVertex); // Add the vertex to the visited vertices set
        MSTResultList.add(poppedEdge); // Add the minimum edge to the MST
 
        
-       for (Edge e : edgesList) {
+       for (Edge e : poppedVertex.getAdjList()) {
         Vertex source = e.getSource();
         Vertex target = e.getTarget();
 
@@ -86,8 +80,10 @@ return MSTResultList;
 @Override
 public void displayResultingMST() {
 
+    int result =0;
    for (int i = 1; i < MSTResultList.size(); i++) {
     MSTResultList.get(i).displayInfo();
+    result+= MSTResultList.get(i).getWeight();
    }
    System.out.println("The cost of designed phone network: " + result);
 }

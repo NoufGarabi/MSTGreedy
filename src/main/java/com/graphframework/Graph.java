@@ -149,7 +149,7 @@ public class Graph {
         int vertNum = scanner.nextInt();
 
         // Create new graph
-        Graph network = new Graph(vertNum, isDirected);
+        Graph graph = new Graph(vertNum, isDirected);
 
         // Get edges number
         int edgesNum = scanner.nextInt();
@@ -163,13 +163,13 @@ public class Graph {
 
             // Create new offices if they don't exist in the array
             int v1Index = s1 - 65; // Convert label to index
-            Vertex v1 = network.getVertex(Integer.toString(v1Index));
+            Vertex v1 = graph.getVertex(Integer.toString(v1Index));
             if (vertices[v1Index] == null) {
                 vertices[v1Index] = new Vertex(s1 - 65 + "");
             }
 
             int v2Index = s2 - 65; // Convert label to index
-            Vertex v2 = network.getVertex(Integer.toString(v2Index));
+            Vertex v2 = graph.getVertex(Integer.toString(v2Index));
             if (vertices[v2Index] == null) {
                 vertices[v2Index] = new Vertex(s2 - 65 + "");
             }
@@ -178,11 +178,11 @@ public class Graph {
             int w = scanner.nextInt();
 
             // Add edge to graph
-            network.addEdge(v1, v2, w);
+            graph.addEdge(v1, v2, w);
         }
 
         scanner.close();
-        return network;
+        return graph;
     }
 
     // Gets the vertex with the given label.

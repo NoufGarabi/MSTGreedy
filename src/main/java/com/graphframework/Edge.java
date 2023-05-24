@@ -10,10 +10,12 @@ public class Edge {
     private int weight; // The weight of the edge
     private Vertex parent; // parent of edge
 
+    // Get the parent vertex of edge
     public Vertex getParent() {
         return parent;
     }
 
+    // Set the parent vertex of edge
     public void setParent(Vertex parent) {
         this.parent = parent;
     }

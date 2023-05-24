@@ -8,6 +8,15 @@ public class Edge {
     private Vertex source; // The source vertex of the edge
     private Vertex target; // The target vertex of the edge
     private int weight; // The weight of the edge
+    private Vertex parent; // parent of edge
+
+    public Vertex getParent() {
+        return parent;
+    }
+
+    public void setParent(Vertex parent) {
+        this.parent = parent;
+    }
 
     // Main constructor for the Edge class.
     public Edge(int weight) {

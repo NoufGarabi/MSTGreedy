@@ -22,6 +22,7 @@ public class Location extends Vertex {
      * @param city The city associated with the location.
      */
     public Location(String city) {
+        super(city);
         this.city = city;
     }
 

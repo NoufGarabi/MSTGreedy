@@ -6,17 +6,9 @@ It contains information about an office, a key value, an edge, an index, and a l
 package com.graphframework;
 
 public class HeapNode {
-Vertex vertex; // The office associated with the node
+Vertex vertex; // The vertex associated with the node
 int key; // The key value of the node
 Edge edge; // The edge associated with the node
-public Edge getEdge() {
-    return edge;
-}
-
-public void setEdge(Edge edge) {
-    this.edge = edge;
-}
-
 int index; // The index of the node
 
 /**
@@ -25,9 +17,9 @@ int index; // The index of the node
 public HeapNode() {}
 
 /**
- * Constructor for the HeapNode class that sets the office, key, and edge.
+ * Constructor for the HeapNode class that sets the vertex, key, and edge.
  *
- * @param target The office associated with the node.
+ * @param target The vertex associated with the node.
  * @param key    The key value of the node.
  * @param e   The edge associated with the node.
  */
@@ -38,18 +30,18 @@ public HeapNode(Vertex target, int key, Edge e) {
 }
 
 /**
- * Returns the office associated with the node.
+ * Returns the vertex associated with the node.
  *
- * @return The office associated with the node.
+ * @return The vertex associated with the node.
  */
 public Vertex getVertex() {
     return this.vertex;
 }
 
 /**
- * Sets the office associated with the node.
+ * Sets the vertex associated with the node.
  *
- * @param office The office to be associated with the node.
+ * @param Vertex The vertex to be associated with the node.
  */
 public void setVertex(Vertex vertex) {
     this.vertex = vertex;
@@ -92,8 +84,21 @@ public void setIndex(int id) {
 }
 
 /**
- * Returns the line associated with the node.
+ * Returns the edge of the node.
  *
- * @return The line associated with the node.
+ * @return The edge of the node.
  */
+public Edge getEdge() {
+    return edge;
+}
+
+/**
+ * Sets the edge of the node.
+ *
+ * @param edge The edge to be set.
+ */
+public void setEdge(Edge edge) {
+    this.edge = edge;
+}
+
 }

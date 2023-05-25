@@ -34,66 +34,6 @@ public class AFRouteMap extends Graph {
 
     /**
      * 
-     * Reads a graph from a file with the given filename.
-     * 
-     * @param filename The name of the file to read the graph from.
-     * 
-     * @return The AFRouteMap object representing the read graph.
-     * 
-     * @throws FileNotFoundException If the specified file is not found.
-     */
-    public static AFRouteMap readGraphFromFile(String filename) throws FileNotFoundException {
-        File file = new File(filename);
-        Scanner scanner = new Scanner(file);
-
-        // Read if graph is digraph or not
-        String digraphLine = scanner.nextLine();
-        String[] digraphParts = digraphLine.split(" ");
-        int digraphValue = Integer.parseInt(digraphParts[1]);
-        boolean isDirected = (digraphValue == 1);
-
-        // Get vertices number
-        int vertNum = scanner.nextInt();
-
-        // Create new graph
-        AFRouteMap routeMap = new AFRouteMap(vertNum, isDirected);
-
-        // Get edges number
-        int edgesNum = scanner.nextInt();
-
-        // Create an array to store the vertices
-        Location[] vertices = new Location[vertNum];
-
-        for (int i = 0; i < edgesNum; i++) {
-            char s1 = scanner.next().charAt(0); // Get label of source office
-            char s2 = scanner.next().charAt(0); // Get label of target office
-
-            // Create new offices if they don't exist in the array
-            int v1Index = s1 - 65; // Convert label to index
-            Location v1 = (Location) routeMap.getVertex(Integer.toString(v1Index));
-            if (vertices[v1Index] == null) {
-                vertices[v1Index] = (Location) routeMap.createVertex(s1 - 65 + "");
-            }
-
-            int v2Index = s2 - 65; // Convert label to index
-            Location v2 = (Location) routeMap.getVertex(Integer.toString(v2Index));
-            if (vertices[v2Index] == null) {
-                vertices[v2Index] = (Location) routeMap.createVertex(s2 - 65 + "");
-            }
-
-            // Get weight of edge
-            int w = scanner.nextInt();
-
-            // Add edge to graph
-            routeMap.addEdge(v1, v2, w);
-        }
-
-        scanner.close();
-        return routeMap;
-    }
-
-    /**
-     * 
      * Creates a new edge between the given vertices with the specified weight.
      * 
      * @param vertex  The source vertex of the edge.

@@ -3,9 +3,11 @@ package com.graphframework;
 public class DBAllSourceSPAlg extends ShortestPathAlgorithm {
     
     public void computeDijkstraBasedSPAlg(Graph graph){
-        SingleSourceSPAlg dikjstra = new SingleSourceSPAlg();
         for(Vertex v : graph.getAdjList()){
-            dikjstra.computeDijkstraAlg(graph, v);
+            System.out.println("Location " + v.getLabel());
+            SingleSourceSPAlg.computeDijkstraAlg(graph, v);
+            System.out.println();
+            System.out.println();
         }
 
     }

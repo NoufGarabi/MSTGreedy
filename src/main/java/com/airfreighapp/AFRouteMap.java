@@ -8,11 +8,6 @@ package com.airfreighapp;
 import com.graphframework.Edge;
 import com.graphframework.Graph;
 import com.graphframework.Vertex;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 /**
  * 
  * The AFRouteMap class represents a route map for an air freight network.

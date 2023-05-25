@@ -22,7 +22,7 @@ class MinHeap {
         heap = new HeapNode[capacity + 1];
         indecies = new int[capacity];
 
-        // this node is a placeholder only 
+        // this node is a placeholder only
         heap[0] = new HeapNode();
         heap[0].vertex = new Vertex("");
         heap[0].key = Integer.MIN_VALUE;
@@ -135,13 +135,12 @@ class MinHeap {
         indecies[heap[index1].index] = index1;
         indecies[heap[index2].index] = index2;
     }
-    
 
     public void decreaseKey(int newKey, int id) {
-        //get the edges which key's needs the decrease;
+        // get the edges which key's needs the decrease;
         int index = indecies[id];
 
-        //get the node and update its value
+        // get the node and update its value
         HeapNode node = heap[index];
         node.key = newKey;
         bubbleUp(index);

@@ -5,8 +5,10 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * The KruskalAlg class implements Kruskal's algorithm to find the minimum spanning tree (MST) of a graph.
- * It constructs the MST by iteratively adding the edges with the smallest weight that do not form cycles.
+ * The KruskalAlg class implements Kruskal's algorithm to find the minimum
+ * spanning tree (MST) of a graph.
+ * It constructs the MST by iteratively adding the edges with the smallest
+ * weight that do not form cycles.
  */
 public class KruskalAlg extends MSTAlgor {
     private int V; // Number of vertices
@@ -26,7 +28,8 @@ public class KruskalAlg extends MSTAlgor {
     /**
      * Finds the root of the subset that contains the vertex x.
      *
-     * @param parent The array representing the parent of each vertex in the disjoint sets.
+     * @param parent The array representing the parent of each vertex in the
+     *               disjoint sets.
      * @param x      The vertex for which to find the root.
      * @return The root of the subset containing vertex x.
      */
@@ -39,8 +42,10 @@ public class KruskalAlg extends MSTAlgor {
     /**
      * Combines two subsets into a single subset.
      *
-     * @param parent The array representing the parent of each vertex in the disjoint sets.
-     * @param rank   The array representing the rank of each vertex in the disjoint sets.
+     * @param parent The array representing the parent of each vertex in the
+     *               disjoint sets.
+     * @param rank   The array representing the rank of each vertex in the disjoint
+     *               sets.
      * @param x      The root of the first subset.
      * @param y      The root of the second subset.
      */

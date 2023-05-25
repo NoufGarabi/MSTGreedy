@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class KruskalAlg extends MSTAlgor {
     private int V; // Number of vertices
-    private int E; // Number of edges
     private List<Edge> edges; // List of edges
     private Edge[] result; // Resulting minimum spanning tree
 
@@ -21,7 +20,6 @@ public class KruskalAlg extends MSTAlgor {
      */
     public KruskalAlg(Graph g) {
         V = g.getVerticesNum();
-        E = g.getEdges().size();
         edges = g.getEdges();
     }
 

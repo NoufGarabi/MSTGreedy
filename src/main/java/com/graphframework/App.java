@@ -62,10 +62,10 @@ public class App {
 
         System.out.println("=============== Prims Algorithm ================");
 
-        PrimAlgor prim = new PrimAlgor();
+        PrimAlgor prim = new PrimAlgor(graph);
 
         long primStart = System.currentTimeMillis(); //track time in milli
-        prim.MHPrimImplementation(graph);
+        prim.MHPrimImplementation();
         long primEnd = System.currentTimeMillis(); 
 
         prim.displayResultingMST();

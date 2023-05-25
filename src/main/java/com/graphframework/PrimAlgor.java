@@ -11,14 +11,35 @@ import java.util.Set;
 
 public class PrimAlgor extends MSTAlgor {
 List<Edge> MSTResultList;
+Graph graph;
+Set<Vertex> visitedVertices;
+MinHeap minHeap;
+List<Vertex> adjList;
+int numOfVertices;
+
 /**
 
 * Constructs a new PrimAlgor object.
 * Initializes the MSTResultList as an empty ArrayList.
 */
-public PrimAlgor() {
+public PrimAlgor(Graph graph) {
    super();
-   MSTResultList =  new ArrayList<>();
+   MSTResultList =  new ArrayList<>(); //store MST
+
+   // get adj list of graph
+   this.adjList = graph.getAdjList();
+
+    // Get the number of vertices from the graph
+   this.numOfVertices = graph.getVerticesNum();
+    // Keep track of visited vertices
+    this.visitedVertices = new HashSet<Vertex>();
+
+    // Create a new min heap
+    this.minHeap = new MinHeap(graph.getEdges().size()); 
+
+    // Insert the first vertex into the min heap and give it a cost of 0
+    Vertex firstVertex = adjList.get(0); // Get the first vertex from the adjacency list
+    minHeap.insert(new HeapNode(firstVertex ,0, graph.createEdge(firstVertex, firstVertex, 0)));
 }
 
 /**
@@ -26,27 +47,12 @@ public PrimAlgor() {
 * 
 * @param graph The graph for which the minimum spanning tree needs to be found.
 */
-public List<Edge> MHPrimImplementation(Graph graph) {
-
-   // Get the number of vertices from the graph
-   int numOfVertices = graph.getVerticesNum();
-   // Get the adjacency list from the graph
-   List<Vertex> adjList = graph.getAdjList();
-
-
-   // Keep track of visited vertices
-   Set<Vertex> visitedVertices = new HashSet<Vertex>();
-   MinHeap minHeap = new MinHeap(numOfVertices * numOfVertices); // Create a new min heap
-
-   // Insert the first vertex into the min heap and give it a cost of 0
-   Vertex firstVertex = adjList.get(0); // Get the first vertex from the adjacency list
-   minHeap.insert(new HeapNode(firstVertex ,0, graph.createEdge(firstVertex, firstVertex, 0)));
+public List<Edge> MHPrimImplementation() {
 
    while (visitedVertices.size() < numOfVertices && !minHeap.isEmpty()) {
        HeapNode poppedNode = minHeap.pop(); // Extract the minimum node from the heap
        Vertex poppedVertex = poppedNode.getVertex(); // Get the vertex from the node
        Edge poppedEdge = poppedNode.getEdge();
-    //    int cost = poppedNode.getKey(); // Get the key from the node
 
        // If the vertex is already visited, skip it
        if (visitedVertices.contains(poppedVertex))

@@ -3,7 +3,7 @@
 The Line class represents an edge between two vertices in a phone network graph.
 It extends the Edge class from the graph framework.
 */
-package com.phonenetworkapp;
+package com.PhoneNetworkApp;
 
 import com.graphframework.Edge;
 import com.graphframework.Vertex;

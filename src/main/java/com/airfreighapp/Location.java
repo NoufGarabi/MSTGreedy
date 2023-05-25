@@ -34,7 +34,7 @@ public class Location extends Vertex {
      */
     @Override
     public void setLabel(String label) {
-        super.setLabel("loc" + label);
+        super.setLabel(label);
     }
 
     /**
@@ -63,6 +63,6 @@ public class Location extends Vertex {
      */
     @Override
     public void displayInfo() {
-        System.out.println("C : city " + this.city);
+        System.out.print(" : city" + this.city+" - "+"loc."+(char)(Integer.parseInt(getLabel())+65));
     }
 }

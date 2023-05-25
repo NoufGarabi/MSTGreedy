@@ -9,6 +9,6 @@ public class AirFreightApp {
         AFRouteMap routeMap = AFRouteMap.readGraphFromFile("src/main/java/com/airfreighapp/map.txt");
         DBAllSourceSPAlg dijkstra = new DBAllSourceSPAlg();
         dijkstra.computeDijkstraBasedSPAlg(routeMap);   
-        routeMap.getEdges().get(0).displayInfo();
+       
     }
 }

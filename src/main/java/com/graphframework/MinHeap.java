@@ -10,7 +10,7 @@ class MinHeap {
     int capacity;
     int size; // The current size
     HeapNode[] heap;
-    int[] decreaseKey; // To decrease the key
+    int[] indecies; // To decrease the key
 
     /**
      * MinHeap constructor.
@@ -20,15 +20,15 @@ class MinHeap {
     public MinHeap(int capacity) {
         this.capacity = capacity;
         heap = new HeapNode[capacity + 1];
-        decreaseKey = new int[capacity];
+        indecies = new int[capacity];
 
         // this node is a placeholder only 
         heap[0] = new HeapNode();
         heap[0].vertex = new Vertex("");
         heap[0].key = Integer.MIN_VALUE;
         heap[0].index = -1;
-        decreaseKey = new int[capacity];
-        Arrays.fill(decreaseKey, -1); // Initialize all elements with -1
+        indecies = new int[capacity];
+        Arrays.fill(indecies, -1); // Initialize all elements with -1
         size = 0;
     }
 
@@ -39,7 +39,7 @@ class MinHeap {
      */
     public void insert(HeapNode node) {
         heap[++size] = node;
-        decreaseKey[node.index] = size;
+        indecies[node.index] = size;
         bubbleUp(size);
     }
 
@@ -54,8 +54,8 @@ class MinHeap {
         while (currentIdx > 0 && heap[parentIdx].key > heap[currentIdx].key) {
             HeapNode currentNode = heap[currentIdx];
             HeapNode parentNode = heap[parentIdx];
-            decreaseKey[currentNode.index] = parentIdx;
-            decreaseKey[parentNode.index] = currentIdx;
+            indecies[currentNode.index] = parentIdx;
+            indecies[parentNode.index] = currentIdx;
             swap(currentIdx, parentIdx);
             currentIdx = parentIdx;
             parentIdx = parentIdx / 2;
@@ -67,10 +67,10 @@ class MinHeap {
      * 
      * @return The minimum node.
      */
-    public HeapNode extractMin() {
+    public HeapNode pop() {
         HeapNode min = heap[1];
         HeapNode lastNode = heap[size];
-        decreaseKey[lastNode.index] = 1;
+        indecies[lastNode.index] = 1;
         heap[1] = lastNode;
         heap[size] = null;
         sinkDown(1);
@@ -96,8 +96,8 @@ class MinHeap {
         if (theSmallest != position) {
             HeapNode smallestNode = heap[theSmallest];
             HeapNode positionNode = heap[position];
-            decreaseKey[smallestNode.index] = position;
-            decreaseKey[positionNode.index] = theSmallest;
+            indecies[smallestNode.index] = position;
+            indecies[positionNode.index] = theSmallest;
             swap(position, theSmallest);
             sinkDown(theSmallest);
         }
@@ -132,14 +132,14 @@ class MinHeap {
         HeapNode temp = heap[index1];
         heap[index1] = heap[index2];
         heap[index2] = temp;
-        decreaseKey[heap[index1].index] = index1;
-        decreaseKey[heap[index2].index] = index2;
+        indecies[heap[index1].index] = index1;
+        indecies[heap[index2].index] = index2;
     }
     
 
     public void decreaseKey(int newKey, int id) {
         //get the edges which key's needs the decrease;
-        int index = decreaseKey[id];
+        int index = indecies[id];
 
         //get the node and update its value
         HeapNode node = heap[index];

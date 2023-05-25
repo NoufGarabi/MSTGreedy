@@ -43,7 +43,7 @@ public List<Edge> MHPrimImplementation(Graph graph) {
    minHeap.insert(new HeapNode(firstVertex ,0, graph.createEdge(firstVertex, firstVertex, 0)));
 
    while (visitedVertices.size() < numOfVertices && !minHeap.isEmpty()) {
-       HeapNode poppedNode = minHeap.extractMin(); // Extract the minimum node from the heap
+       HeapNode poppedNode = minHeap.pop(); // Extract the minimum node from the heap
        Vertex poppedVertex = poppedNode.getVertex(); // Get the vertex from the node
        Edge poppedEdge = poppedNode.getEdge();
     //    int cost = poppedNode.getKey(); // Get the key from the node

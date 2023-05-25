@@ -1,33 +1,52 @@
 package com.graphframework;
 
-//import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * The KruskalAlg class implements Kruskal's algorithm to find the minimum spanning tree (MST) of a graph.
+ * It constructs the MST by iteratively adding the edges with the smallest weight that do not form cycles.
+ */
 public class KruskalAlg extends MSTAlgor {
-    public int V, E;
-    public static List<Edge> edges;
-    public static Edge[] result;
-   
+    private int V; // Number of vertices
+    private int E; // Number of edges
+    private List<Edge> edges; // List of edges
+    private Edge[] result; // Resulting minimum spanning tree
 
-    // Constructer
-    public KruskalAlg( Graph g) {
+    /**
+     * Constructs a KruskalAlg object with the given graph.
+     *
+     * @param g The graph for which to find the minimum spanning tree.
+     */
+    public KruskalAlg(Graph g) {
         V = g.getVerticesNum();
         E = g.getEdges().size();
         edges = g.getEdges();
-        
     }
 
-    // To return the subset that contain i
-    public int find(int[] parent, int x) {
+    /**
+     * Finds the root of the subset that contains the vertex x.
+     *
+     * @param parent The array representing the parent of each vertex in the disjoint sets.
+     * @param x      The vertex for which to find the root.
+     * @return The root of the subset containing vertex x.
+     */
+    private int find(int[] parent, int x) {
         if (parent[x] == x)
             return x;
         return find(parent, parent[x]);
     }
 
-    // To construct union of the disjoint
-    public void union(int[] parent, int[] rank, int x, int y) {
+    /**
+     * Combines two subsets into a single subset.
+     *
+     * @param parent The array representing the parent of each vertex in the disjoint sets.
+     * @param rank   The array representing the rank of each vertex in the disjoint sets.
+     * @param x      The root of the first subset.
+     * @param y      The root of the second subset.
+     */
+    private void union(int[] parent, int[] rank, int x, int y) {
         int xroot = find(parent, x);
         int yroot = find(parent, y);
 
@@ -41,18 +60,19 @@ public class KruskalAlg extends MSTAlgor {
         }
     }
 
+    /**
+     * Performs Kruskal's algorithm to find the minimum spanning tree.
+     * The result is stored in the result array.
+     */
     public void kruskalMST() {
         result = new Edge[V];
         int e = 0;
         int i = 0;
 
-        // Sort the array
-        
-        SortedMethod(edges);
+        // Sort the edges in ascending order of weight
+        sortEdges();
 
-     
-
-        // Array to find the parent, rank of the vertice
+        // Array to store the parent and rank of each vertex
         int[] parent = new int[V];
         int[] rank = new int[V];
 
@@ -62,50 +82,43 @@ public class KruskalAlg extends MSTAlgor {
         }
 
         i = 0;
-        // finding the least cost edges and construct rhe minimum spanning tree
+        // Find the least cost edges and construct the minimum spanning tree
         while (e < V - 1) {
-            
-            Edge next_edge = edges.get(i++);
-            
+            Edge nextEdge = edges.get(i++);
 
-            int x = find(parent, Integer.parseInt(next_edge.getSource().getLabel()));
-            int y = find(parent, Integer.parseInt(next_edge.getTarget().getLabel()));
+            int x = find(parent, Integer.parseInt(nextEdge.getSource().getLabel()));
+            int y = find(parent, Integer.parseInt(nextEdge.getTarget().getLabel()));
 
             if (x != y) {
-                result[e++] = next_edge;
+                result[e++] = nextEdge;
                 union(parent, rank, x, y);
             }
         }
     }
 
     @Override
-    // Method to print the result
+    /**
+     * Displays the resulting minimum spanning tree and its total cost.
+     */
     public void displayResultingMST() {
         int minimumCost = 0;
 
         for (int i = 0; i < V - 1; i++) {
             result[i].displayInfo();
             minimumCost += result[i].getWeight();
-
         }
-        System.out.println("The cost of designed phone network: " + minimumCost);
-
+        System.out.println("The cost of the designed phone network: " + minimumCost);
     }
-    
-    
-    //Method to sort the List of edges 
-        public List<Edge> SortedMethod(List<Edge> edge) {
 
-        Collections.sort(edge, new Comparator<Edge>() {
-
+    /**
+     * Sorts the list of edges in ascending order of weight.
+     */
+    private void sortEdges() {
+        Collections.sort(edges, new Comparator<Edge>() {
             @Override
             public int compare(Edge edge1, Edge edge2) {
-                return edge1.getWeight()- edge2.getWeight();
+                return edge1.getWeight() - edge2.getWeight();
             }
-
         });
-        return edge;
     }
-     
-
 }

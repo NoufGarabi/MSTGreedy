@@ -4,26 +4,32 @@ import com.airfreighapp.Location;
 
 public class SingleSourceSPAlg extends ShortestPathAlgorithm {
 
-   //Infinity value
+    //Infinity value
     private static final int INF = Integer.MAX_VALUE;
+    static int[] dist;
+    static Graph graph;
+    static Vertex source;
+    static Location[] locations;
 
     //Method to compute dijkstra algorithm 
-    public static void computeDijkstraAlg(Graph graph, Vertex source) {
+    public static void computeDijkstraAlg(Graph graph1, Vertex vertex) {
+        graph = graph1;
+        source = vertex;
         //Define number of vertex
         int n = graph.getAdjList().size();
         //Array to store distance
-        int[] dist = new int[n];
+        dist = new int[n];
         //Array to check if the vertex visited
         boolean[] visited = new boolean[n];
         //Array to store the previous vertex
         Vertex[] prev = new Vertex[n];
         //Array to store locations
-        Location[] locations = new Location[n];
+        locations = new Location[n];
 
         //Initialize distances with infinity 
         for (int i = 0; i < n; i++) {
             dist[i] = INF;
-     
+
         }
 
         //Get the index of the source vertex and assign it destance with 0 
@@ -45,7 +51,7 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
                 Vertex v = e.getTarget();
                 int vIndex = graph.getAdjList().indexOf(v);
                 int weight = e.getWeight();
-               
+
                 if (!visited[vIndex] && dist[u] != INF && dist[u] + weight < dist[vIndex]) {
                     //Add the u destance to v
                     dist[vIndex] = dist[u] + weight;
@@ -55,10 +61,10 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
             }
         }
 
-        DisplayDijkstra(dist, source,graph, locations);
+        // DisplayDijkstra(dist, source, graph, locations);
     }
 
-     //Method to find min distance 
+    //Method to find min distance 
     private static int findMinDist(int[] dist, boolean[] visited) {
         int minDist = INF;
         int minIndex = 0;
@@ -73,11 +79,14 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
         return minIndex;
     }
 //Method to display the result
-    private static void DisplayDijkstra(int[] dist, Vertex source, Graph graph, Location[] location) {
+
+    public void DisplayDijkstra() {
         //To count the distances from source to others
         int count = 0;
-
-        System.out.print("loc." + (char) (Integer.parseInt(source.getLabel()) + 65));
+        //The source label
+        char s = (char) (Integer.parseInt(source.getLabel()) + 65);
+        System.out.println("Location " + s);
+        System.out.print("loc." + s);
         for (int i = 0; i < graph.adjList.size(); i++) {
 
             //Check 
@@ -88,12 +97,14 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
             //add the distance to count
             count += dist[i];
             //Assign the city and label to locations and call displayInfo
-            location[i] = new Location(dist[i] + "");
-            location[i].setLabel(graph.getAdjList().get(i).getLabel());
-            location[i].displayInfo();
-         
+            locations[i] = new Location(dist[i] + "");
+            locations[i].setLabel(graph.getAdjList().get(i).getLabel());
+            locations[i].displayInfo();
+
         }
         //Print Route length
         System.out.println(": Route length :" + count);
+        System.out.println("-------------------------------------------");
+
     }
 }

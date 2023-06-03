@@ -91,13 +91,9 @@ prim.displayResultingMST();
 
 ```java
 // Create an instance of Dijkstra's algorithm
-Dijkstra dijkstra = new Dijkstra();
-
-// Find the shortest path from vertex 0 to vertex 4
-List<Integer> shortestPath = dijkstra.findShortestPath(graph, 0, 4);
-
-// Print the shortest path
-System.out.println(shortestPath);
+       DBAllSourceSPAlg dijkstra = new DBAllSourceSPAlg();
+// Pass a graph to the instance
+       dijkstra.computeDijkstraBasedSPAlg(routeMap);
 ```
 
 # Contributing 🧑‍🤝‍🧑

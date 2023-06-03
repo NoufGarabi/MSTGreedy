@@ -6,10 +6,15 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
 
     //Infinity value
     private static final int INF = Integer.MAX_VALUE;
+    //Array to store distance
     static int[] dist;
+    //Array to store locations
+    static Location[] locations;
+    //Array to save the paths
+    static String[] arr;
+        
     static Graph graph;
     static Vertex source;
-    static Location[] locations;
 
     //Method to compute dijkstra algorithm 
     public static void computeDijkstraAlg(Graph graph1, Vertex vertex) {
@@ -17,18 +22,19 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
         source = vertex;
         //Define number of vertex
         int n = graph.getAdjList().size();
-        //Array to store distance
+        //New objects to the arrays
+        locations = new Location[n];
+        arr = new String[n];
         dist = new int[n];
         //Array to check if the vertex visited
         boolean[] visited = new boolean[n];
         //Array to store the previous vertex
         Vertex[] prev = new Vertex[n];
-        //Array to store locations
-        locations = new Location[n];
 
         //Initialize distances with infinity 
         for (int i = 0; i < n; i++) {
             dist[i] = INF;
+            arr[i] = "";
 
         }
 
@@ -56,15 +62,16 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
                     //Add the u destance to v
                     dist[vIndex] = dist[u] + weight;
                     prev[vIndex] = uVertex;
+                    //Add the path to v 
+                    arr[vIndex] = arr[u] + (char) (Integer.parseInt(v.getLabel()) + 65) + "";
 
                 }
             }
         }
 
-        // DisplayDijkstra(dist, source, graph, locations);
     }
 
-    //Method to find min distance 
+    //Method to find minimum distance 
     private static int findMinDist(int[] dist, boolean[] visited) {
         int minDist = INF;
         int minIndex = 0;
@@ -78,33 +85,42 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
 
         return minIndex;
     }
-//Method to display the result
 
+//Method to display the result
     public void DisplayDijkstra() {
-        //To count the distances from source to others
-        int count = 0;
+        //To check if this vertex has at least one path to other vertices 
+        boolean flag = false;
         //The source label
         char s = (char) (Integer.parseInt(source.getLabel()) + 65);
         System.out.println("Location " + s);
-        System.out.print("loc." + s);
+
         for (int i = 0; i < graph.adjList.size(); i++) {
 
-            //Check 
+            //Check that there is path from source to other
             if (dist[i] == 0 || dist[i] == INF) {
                 continue;
             }
+            //There is path so it is true
+            flag = true;
+            System.out.print("loc." + s);
 
-            //add the distance to count
-            count += dist[i];
-            //Assign the city and label to locations and call displayInfo
-            locations[i] = new Location(dist[i] + "");
-            locations[i].setLabel(graph.getAdjList().get(i).getLabel());
-            locations[i].displayInfo();
+            //Loop to print the entire path from sorce to the target
+            for (int j = 0; j < arr[i].length(); j++) {
+                //Assign the city and call displayInfo
+                locations[i] = new Location(arr[i].charAt(j) + "");
+                locations[i].displayInfo();
+
+            }
+
+            //Print Route length
+            System.out.println(": Route length :" + dist[i]);
 
         }
-        //Print Route length
-        System.out.println(": Route length :" + count);
-        System.out.println("-------------------------------------------");
+        //If there is no path from this source
+        if (!flag) {
+            System.out.println("There are no paths from " + s + " to other vertices");
+
+        }
 
     }
 }

@@ -3,7 +3,7 @@
 The BluePrintsGraph class extends the Graph class and represents a graph specifically designed for blueprints.
 It inherits the basic graph functionality from the Graph class and provides specific implementations for creating vertices and edges.
 */
-package com.PhoneNetworkApp;
+package com.phonenetworkapp;
 
 import java.io.File;
 import java.io.FileNotFoundException;

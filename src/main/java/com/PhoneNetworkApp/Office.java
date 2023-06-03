@@ -3,7 +3,7 @@
 The Office class represents a vertex in a phone network graph that represents an office.
 It extends the Vertex class from the graph framework.
 */
-package com.PhoneNetworkApp;
+package com.phonenetworkapp;
 
 import com.graphframework.Vertex;
 

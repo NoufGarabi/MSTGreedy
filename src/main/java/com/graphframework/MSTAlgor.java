@@ -1,3 +1,11 @@
+/*
+ Names : 
+ Nouf Khaled Algarabi 2006172 b8
+ Wedyan Fawaz Almushaddaq 2105113 b8
+ Aya Habib Khan 2010298 b10
+ Joud Jamal Alkishi 2011026 b8
+ */
+
 /**
  * The MSTAlgor class is an abstract class representing an algorithm for finding
  * the minimum spanning tree (MST) of a graph.

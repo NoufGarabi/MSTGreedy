@@ -121,6 +121,8 @@ public class SingleSourceSPAlg extends ShortestPathAlgorithm {
             System.out.println("There are no paths from " + s + " to other vertices");
 
         }
+        
+        System.out.println("\n-------------------------------------------\n");   
 
     }
 }

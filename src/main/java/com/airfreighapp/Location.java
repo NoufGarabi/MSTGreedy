@@ -63,6 +63,6 @@ public class Location extends Vertex {
      */
     @Override
     public void displayInfo() {
-        System.out.print(" : city" + this.city+" - "+"loc."+(char)(Integer.parseInt(getLabel())+65));
+        System.out.print(" : city loc."+city+" ");
     }
 }

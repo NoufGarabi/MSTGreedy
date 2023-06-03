@@ -3,9 +3,6 @@ package com.airfreighapp;
 import java.io.FileNotFoundException;
 
 import  com.graphframework.DBAllSourceSPAlg;
-import  com.graphframework.Graph;
-
-import java.util.Scanner;
 
 public class AirFreightApp {
 

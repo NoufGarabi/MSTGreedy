@@ -6,7 +6,7 @@ public class DBAllSourceSPAlg extends ShortestPathAlgorithm {
         for(Vertex v : graph.getAdjList()){
             SingleSourceSPAlg s = new SingleSourceSPAlg();
             s.computeDijkstraAlg(graph,v);
-            s.DisplayDijkstra();
+            // s.DisplayDijkstra();
             
         
    

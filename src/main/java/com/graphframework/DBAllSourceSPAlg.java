@@ -11,14 +11,12 @@ package com.graphframework;
 public class DBAllSourceSPAlg extends ShortestPathAlgorithm {
     
     public void computeDijkstraBasedSPAlg(Graph graph){
+        // loop through each vertex in the adj list
         for(Vertex v : graph.getAdjList()){
+            //compute dijkstra on each vertex
             SingleSourceSPAlg s = new SingleSourceSPAlg();
             s.computeDijkstraAlg(graph,v);
-            // s.DisplayDijkstra();
-            
-        
-   
-       
+            s.DisplayDijkstra();
         }
 
     }

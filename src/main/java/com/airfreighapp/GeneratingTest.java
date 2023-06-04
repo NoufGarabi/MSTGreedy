@@ -64,7 +64,7 @@ public class GeneratingTest {
         Graph graph = new Graph(vertexNo, false);
         graph.makeGraph(graph);
 
-        // when testing comment out display dijkstra
+        // TODO: when testing comment out display dijkstra
         DBAllSourceSPAlg dijkstra = new DBAllSourceSPAlg();
 
         long dijkstraStrat = System.currentTimeMillis(); // track time in milli
